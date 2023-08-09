@@ -1,6 +1,7 @@
 [
   {
     "property_id": "P001",
+    "user_id": "001",
     "address": "123 Main St",
     "neighborhood": "Downtown",
     "square_feet": 1200,
@@ -14,6 +15,7 @@
   },
   {
     "property_id": "P002",
+    "user_id": "002",
     "address": "456 Elm Ave",
     "neighborhood": "Suburbia",
     "square_feet": 1800,
@@ -27,6 +29,7 @@
   },
   {
     "property_id": "P003",
+    "user_id": "003",
     "address": "789 Oak Rd",
     "neighborhood": "Quiet Heights",
     "square_feet": 800,
@@ -40,6 +43,7 @@
   },
   {
     "property_id": "P004",
+    "user_id": "001",
     "address": "101 Pine St",
     "neighborhood": "Historic District",
     "square_feet": 1500,
@@ -53,6 +57,7 @@
   },
   {
     "property_id": "P005",
+    "user_id": "002",
     "address": "222 Cedar Ave",
     "neighborhood": "Green Meadows",
     "square_feet": 1600,
@@ -66,6 +71,7 @@
   },
   {
     "property_id": "P006",
+    "user_id": "003",
     "address": "333 Maple Rd",
     "neighborhood": "Urban Center",
     "square_feet": 1000,
@@ -79,6 +85,7 @@
   },
   {
     "property_id": "P007",
+    "user_id": "001",
     "address": "444 Walnut St",
     "neighborhood": "Suburbia",
     "square_feet": 1400,
@@ -92,6 +99,7 @@
   },
   {
     "property_id": "P008",
+    "user_id": "002",
     "address": "555 Birch Ave",
     "neighborhood": "Quiet Heights",
     "square_feet": 900,
@@ -105,6 +113,7 @@
   },
   {
     "property_id": "P009",
+    "user_id": "005",
     "address": "666 Oak Rd",
     "neighborhood": "Downtown",
     "square_feet": 1300,
@@ -118,6 +127,7 @@
   },
   {
     "property_id": "P010",
+    "user_id": "004",
     "address": "777 Pine St",
     "neighborhood": "Urban Center",
     "square_feet": 1100,
