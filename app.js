@@ -152,6 +152,6 @@ app.get("/properties", (req, res) => {
 });
 //PUT or PATCH -  edit a property
 
-app.listen(8084, () => {
-  console.log("Example app listening on port 8084!");
+app.listen(8081, () => {
+  console.log("Example app listening on port 8081!");
 });
