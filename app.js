@@ -187,6 +187,28 @@ app.put("/properties/:id", (req, res) => {
   res.status(204).send();
 });
 
-app.listen(8081, () => {
+//DELETE - delete a property
+app.delete("/properties/:id", (req, res) => {
+  if (!req.query.ownerId) {
+    res.status(400).send();
+  }
+
+  const propertyData = readPropertyData();
+  const propertyIndex = propertyData.findIndex(
+    (property) =>
+      property.propertyId === req.params.id &&
+      property.ownerId === req.query.ownerId
+  );
+  if (propertyIndex === -1) {
+    res.status(404).send();
+  } else {
+    propertyData.splice(propertyIndex, 1);
+    savePropertyData(propertyData);
+  }
+
+  res.status(204).send();
+});
+
+app.listen(8082, () => {
   console.log("Example app listening on port 8081!");
 });
