@@ -209,6 +209,6 @@ app.delete("/properties/:id", (req, res) => {
   res.status(204).send();
 });
 
-app.listen(8082, () => {
+app.listen(8081, () => {
   console.log("Example app listening on port 8081!");
 });
