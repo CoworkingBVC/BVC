@@ -85,7 +85,7 @@ app.get("/coworker/:id", (req, res) => {
 //POST - add a new property
 app.post("/properties", (req, res) => {
   if (!req.query.ownerId) {
-    res.status(400).send();
+    res.status(400).send("missing owner ID");
   }
   const ownerProperty = {
     propertyId: uuidv4(), //Library that generate IDs
@@ -143,14 +143,49 @@ app.get("/properties", (req, res) => {
   }
   const ownerPropertyData = readPropertyData();
   const ownerProperties = [];
-  ownerPropertyData.forEach((property) =>{
-    if(property.ownerId === req.query.ownerId){
+  ownerPropertyData.forEach((property) => {
+    if (property.ownerId === req.query.ownerId) {
       ownerProperties.push(property);
     }
-  })
+  });
   res.status(200).send(ownerProperties);
 });
 //PUT or PATCH -  edit a property
+app.put("/properties/:id", (req, res) => {
+  if (!req.query.ownerId) {
+    res.status(400).send();
+  }
+  const newPropertyInfo = {
+    propertyId: req.params.id,
+    ownerId: req.query.ownerId,
+    address: req.body.address,
+    neighborhood: req.body.neighborhood,
+    squareFeet: req.body.squareFeet,
+    hasParking: req.body.hasParking,
+    hasPublicTransit: req.body.hasPublicTransit,
+    workspace: req.body.workspace,
+  };
+  //read list of properties
+  const propertyData = readPropertyData();
+  //find property by id
+  let found = false;
+  for (let i = 0; i < propertyData.length; i++) {
+    if (
+      propertyData[i].propertyId === newPropertyInfo.propertyId &&
+      propertyData[i].ownerId === newPropertyInfo.ownerId
+    ) {
+      found = true;
+      propertyData[i] = newPropertyInfo; //modify the object in the array
+    }
+  }
+  if (!found) {
+    res.status(404).send();
+  }
+  //save the object
+  savePropertyData(propertyData);
+  //204 answer
+  res.status(204).send();
+});
 
 app.listen(8081, () => {
   console.log("Example app listening on port 8081!");

@@ -57,5 +57,63 @@
         "price": 50
       }
     ]
+  },
+  {
+    "propertyId": "eea503a6-6718-4763-8666-f54daef7bbdc",
+    "address": "8st",
+    "neighborhood": "Beltline",
+    "squareFeet": 35988,
+    "hasParking": true,
+    "hasPublicTransit": false,
+    "workspace": [
+      {
+        "type": "meetingRoom",
+        "seats": 3,
+        "isSmokingAlowed": true,
+        "AvailabilityStart": "2023/12/7",
+        "AvailabilityEnd": "2023/12/14",
+        "leaseTerm": "day",
+        "price": 50
+      }
+    ]
+  },
+  {
+    "propertyId": "122b49b7-8351-4243-9a63-b66dcc1b9a32",
+    "address": "8st",
+    "neighborhood": "Beltline",
+    "squareFeet": 35988,
+    "hasParking": true,
+    "hasPublicTransit": false,
+    "workspace": [
+      {
+        "type": "meetingRoom",
+        "seats": 3,
+        "isSmokingAlowed": true,
+        "AvailabilityStart": "2023/12/7",
+        "AvailabilityEnd": "2023/12/14",
+        "leaseTerm": "day",
+        "price": 50
+      }
+    ]
+  },
+  {
+    "propertyId": "7a01ee4a-c341-4743-bbe2-d5874a2191ef",
+    "ownerId": "8",
+    "address": "circle drive1",
+    "neighborhood": "Melbourn",
+    "squareFeet": 35988,
+    "hasParking": true,
+    "hasPublicTransit": false,
+    "workspace": [
+      {
+        "type": "meetingRoom",
+        "seats": 3,
+        "isSmokingAlowed": false,
+        "AvailabilityStart": "2023/12/7",
+        "AvailabilityEnd": "2023/12/14",
+        "leaseTerm": "day",
+        "price": 50
+      }
+    ]
   }
 ]
