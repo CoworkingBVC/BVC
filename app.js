@@ -21,6 +21,17 @@ app.get('/', (req, res) => {
 
 /* signup - ody*/
 //POST - signup
+let userinfo = []; //Start with empty array
+if (fs.existsSync("users.json")) {
+  let data = fs.readFileSync("users.json", "utf-8");
+  userinfo = JSON.parse(data);
+}
+
+app.post("/register", (req, res) => {
+  userinfo.push(req.body);
+  fs.writeFileSync("users.json", JSON.stringify(userinfo));
+  res.sendStatus(200);
+});
 
 /* coworker - jiwon*/
 //GET - display workspace
@@ -143,11 +154,11 @@ app.get("/properties", (req, res) => {
   }
   const ownerPropertyData = readPropertyData();
   const ownerProperties = [];
-  ownerPropertyData.forEach((property) =>{
-    if(property.ownerId === req.query.ownerId){
+  ownerPropertyData.forEach((property) => {
+    if (property.ownerId === req.query.ownerId) {
       ownerProperties.push(property);
     }
-  })
+  });
   res.status(200).send(ownerProperties);
 });
 //PUT or PATCH -  edit a property
