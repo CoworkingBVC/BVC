@@ -28,7 +28,7 @@ if (fs.existsSync("users.json")) {
 }
 
 app.post("/register", (req, res) => {
-  userinfo.push(req.body);
+  userinfo.push({id: uuidv4(), ...req.body});
   fs.writeFileSync("users.json", JSON.stringify(userinfo));
   res.sendStatus(200);
 });
