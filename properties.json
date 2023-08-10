@@ -1,25 +1,5 @@
 [
   {
-    "propertyId": "18e64dd3-31a9-43ea-b155-7e60a67ef1c5",
-    "ownerId": "1",
-    "address": "Walden",
-    "neighborhood": "Walden",
-    "squareFeet": 35,
-    "hasParking": true,
-    "hasPublicTransit": true,
-    "workspace": [
-      {
-        "type": "meetingRoom",
-        "seats": 4,
-        "isSmokingAlowed": false,
-        "AvailabilityStart": "2023/12/12",
-        "AvailabilityEnd": "2023/12/14",
-        "leaseTerm": "day",
-        "price": 50
-      }
-    ]
-  },
-  {
     "propertyId": "bffa0de5-508d-4616-ad0f-1d71448b8591",
     "ownerId": "2",
     "address": "Walden123",
@@ -52,6 +32,45 @@
         "seats": 4,
         "isSmokingAlowed": false,
         "AvailabilityStart": "2023/12/12",
+        "AvailabilityEnd": "2023/12/14",
+        "leaseTerm": "day",
+        "price": 50
+      }
+    ]
+  },
+  {
+    "propertyId": "eea503a6-6718-4763-8666-f54daef7bbdc",
+    "address": "8st",
+    "neighborhood": "Beltline",
+    "squareFeet": 35988,
+    "hasParking": true,
+    "hasPublicTransit": false,
+    "workspace": [
+      {
+        "type": "meetingRoom",
+        "seats": 3,
+        "isSmokingAlowed": true,
+        "AvailabilityStart": "2023/12/7",
+        "AvailabilityEnd": "2023/12/14",
+        "leaseTerm": "day",
+        "price": 50
+      }
+    ]
+  },
+  {
+    "propertyId": "122b49b7-8351-4243-9a63-b66dcc1b9a32",
+    "ownerId": "3",
+    "address": "8st",
+    "neighborhood": "Beltline",
+    "squareFeet": 35988,
+    "hasParking": true,
+    "hasPublicTransit": false,
+    "workspace": [
+      {
+        "type": "meetingRoom",
+        "seats": 3,
+        "isSmokingAlowed": true,
+        "AvailabilityStart": "2023/12/7",
         "AvailabilityEnd": "2023/12/14",
         "leaseTerm": "day",
         "price": 50
