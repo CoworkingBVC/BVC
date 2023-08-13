@@ -1,142 +1,80 @@
 [
   {
-    "property_id": "P001",
-    "user_id": "001",
-    "address": "123 Main St",
-    "neighborhood": "Downtown",
-    "square_feet": 1200,
-    "parking": true,
-    "public_transportation": true,
-    "seating_capacity": 20,
-    "smoking_allowed": false,
-    "availability_date": "2023-09-01",
-    "lease_term": "12 months",
-    "price": 2000
+    "propertyId": "bffa0de5-508d-4616-ad0f-1d71448b8591",
+    "ownerId": "2",
+    "address": "Walden123",
+    "neighborhood": "Walden234",
+    "squareFeet": 3556,
+    "hasParking": true,
+    "hasPublicTransit": true,
+    "workspace": [
+      {
+        "type": "meetingRoom",
+        "seats": 4,
+        "isSmokingAlowed": false,
+        "AvailabilityStart": "2023/12/12",
+        "AvailabilityEnd": "2023/12/14",
+        "leaseTerm": "day",
+        "price": 50
+      }
+    ]
   },
   {
-    "property_id": "P002",
-    "user_id": "002",
-    "address": "456 Elm Ave",
-    "neighborhood": "Suburbia",
-    "square_feet": 1800,
-    "parking": true,
-    "public_transportation": false,
-    "seating_capacity": 15,
-    "smoking_allowed": true,
-    "availability_date": "2023-08-15",
-    "lease_term": "6 months",
-    "price": 1800
+    "propertyId": "69c7277a-dfb4-402b-ad96-aee17112d26f",
+    "address": "Walden123",
+    "neighborhood": "Walden234",
+    "squareFeet": 3556,
+    "hasParking": true,
+    "hasPublicTransit": true,
+    "workspace": [
+      {
+        "type": "meetingRoom",
+        "seats": 4,
+        "isSmokingAlowed": false,
+        "AvailabilityStart": "2023/12/12",
+        "AvailabilityEnd": "2023/12/14",
+        "leaseTerm": "day",
+        "price": 50
+      }
+    ]
   },
   {
-    "property_id": "P003",
-    "user_id": "003",
-    "address": "789 Oak Rd",
-    "neighborhood": "Quiet Heights",
-    "square_feet": 800,
-    "parking": false,
-    "public_transportation": true,
-    "seating_capacity": 10,
-    "smoking_allowed": false,
-    "availability_date": "2023-09-01",
-    "lease_term": "9 months",
-    "price": 1200
+    "propertyId": "eea503a6-6718-4763-8666-f54daef7bbdc",
+    "address": "8st",
+    "neighborhood": "Beltline",
+    "squareFeet": 35988,
+    "hasParking": true,
+    "hasPublicTransit": false,
+    "workspace": [
+      {
+        "type": "meetingRoom",
+        "seats": 3,
+        "isSmokingAlowed": true,
+        "AvailabilityStart": "2023/12/7",
+        "AvailabilityEnd": "2023/12/14",
+        "leaseTerm": "day",
+        "price": 50
+      }
+    ]
   },
   {
-    "property_id": "P004",
-    "user_id": "001",
-    "address": "101 Pine St",
-    "neighborhood": "Historic District",
-    "square_feet": 1500,
-    "parking": true,
-    "public_transportation": true,
-    "seating_capacity": 25,
-    "smoking_allowed": true,
-    "availability_date": "2023-08-25",
-    "lease_term": "12 months",
-    "price": 2500
-  },
-  {
-    "property_id": "P005",
-    "user_id": "002",
-    "address": "222 Cedar Ave",
-    "neighborhood": "Green Meadows",
-    "square_feet": 1600,
-    "parking": true,
-    "public_transportation": true,
-    "seating_capacity": 18,
-    "smoking_allowed": false,
-    "availability_date": "2023-09-15",
-    "lease_term": "6 months",
-    "price": 2200
-  },
-  {
-    "property_id": "P006",
-    "user_id": "003",
-    "address": "333 Maple Rd",
-    "neighborhood": "Urban Center",
-    "square_feet": 1000,
-    "parking": true,
-    "public_transportation": true,
-    "seating_capacity": 12,
-    "smoking_allowed": true,
-    "availability_date": "2023-09-01",
-    "lease_term": "9 months",
-    "price": 1500
-  },
-  {
-    "property_id": "P007",
-    "user_id": "001",
-    "address": "444 Walnut St",
-    "neighborhood": "Suburbia",
-    "square_feet": 1400,
-    "parking": true,
-    "public_transportation": false,
-    "seating_capacity": 20,
-    "smoking_allowed": false,
-    "availability_date": "2023-08-10",
-    "lease_term": "12 months",
-    "price": 1900
-  },
-  {
-    "property_id": "P008",
-    "user_id": "002",
-    "address": "555 Birch Ave",
-    "neighborhood": "Quiet Heights",
-    "square_feet": 900,
-    "parking": false,
-    "public_transportation": true,
-    "seating_capacity": 8,
-    "smoking_allowed": true,
-    "availability_date": "2023-09-01",
-    "lease_term": "6 months",
-    "price": 1300
-  },
-  {
-    "property_id": "P009",
-    "user_id": "005",
-    "address": "666 Oak Rd",
-    "neighborhood": "Downtown",
-    "square_feet": 1300,
-    "parking": true,
-    "public_transportation": true,
-    "seating_capacity": 16,
-    "smoking_allowed": false,
-    "availability_date": "2023-09-15",
-    "lease_term": "9 months",
-    "price": 1800
-  },
-  {
-    "property_id": "P010",
-    "user_id": "004",
-    "address": "777 Pine St",
-    "neighborhood": "Urban Center",
-    "square_feet": 1100,
-    "parking": true,
-    "public_transportation": true,
-    "seating_capacity": 14,
-    "smoking_allowed": true,
-    "availability_date": "2023-08-20",
-    "lease_term": "12 months",
-    "price": 1700
+    "propertyId": "122b49b7-8351-4243-9a63-b66dcc1b9a32",
+    "ownerId": "3",
+    "address": "8st",
+    "neighborhood": "Beltline",
+    "squareFeet": 35988,
+    "hasParking": true,
+    "hasPublicTransit": false,
+    "workspace": [
+      {
+        "type": "meetingRoom",
+        "seats": 3,
+        "isSmokingAlowed": true,
+        "AvailabilityStart": "2023/12/7",
+        "AvailabilityEnd": "2023/12/14",
+        "leaseTerm": "day",
+        "price": 50
+      }
+    ]
   }
 ]
