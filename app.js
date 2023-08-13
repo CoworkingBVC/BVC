@@ -9,13 +9,6 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-/* for each page? */
-/* 
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html')
-})
- */
-
 /* login - nya*/
 //POST - login
 
@@ -28,7 +21,7 @@ if (fs.existsSync("users.json")) {
 }
 
 app.post("/register", (req, res) => {
-  userinfo.push({id: uuidv4(), ...req.body});
+  userinfo.push({ id: uuidv4(), ...req.body });
   fs.writeFileSync("users.json", JSON.stringify(userinfo));
   res.sendStatus(200);
 });
@@ -73,7 +66,6 @@ app.get("/coworker/:id", (req, res) => {
       }
     }
     let property = properties.find((item) => (item.property_id = propertyId));
-    console.log(property);
 
     const responseMessage = {
       status: "success",
