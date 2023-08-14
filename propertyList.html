@@ -58,21 +58,24 @@
         </div>
       </div>
     </main>
-    <script src="/propertyList.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!--  <script src="/src/propertyList.js"></script> -->
     <!--     <script>
-      fetch("/coworker", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+      fetch("/coworker")
         .then((response) => response.json())
-        .then((data) => {
-          console.log(data.result);
-          console.log("GET");
+        .then((properties) => {
+          /*           const propertyContainer =
+            document.getElementById("propertyContainer");
+          properties.forEach((property) => {
+            const propertyElement = document.createElement("div");
+            propertyElement.textContent = property.name; // Adjust based on your property structure
+            propertyContainer.appendChild(propertyElement);
+          }); */
+          console.log("fetch");
         })
         .catch((error) => {
-          console.error("Error:", error);
+          console.error(error);
         });
     </script> -->
   </body>
