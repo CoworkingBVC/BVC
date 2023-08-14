@@ -1,6 +1,8 @@
 const { v4: uuidv4 } = require("uuid");
 const express = require("express");
 const bodyParser = require("body-parser");
+const path = require("path");
+const url = require("url");
 
 const fs = require("fs");
 
@@ -8,13 +10,11 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(__dirname + "/public"));
 
-/* for each page? */
-/* 
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html')
-})
- */
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/main.html");
+});
 
 /* login - nya*/
 //POST - login
@@ -28,14 +28,14 @@ if (fs.existsSync("users.json")) {
 }
 
 app.post("/register", (req, res) => {
-  userinfo.push({id: uuidv4(), ...req.body});
+  userinfo.push({ id: uuidv4(), ...req.body });
   fs.writeFileSync("users.json", JSON.stringify(userinfo));
   res.sendStatus(200);
 });
 
 /* coworker - jiwon*/
 //GET - display workspace
-app.get("/coworker", (req, res) => {
+app.get("/coworker", async (req, res) => {
   try {
     let properties = [];
 
@@ -52,12 +52,46 @@ app.get("/coworker", (req, res) => {
       status: "success",
       result: properties,
     };
+    console.log("server GET");
 
-    res.json(responseMessage);
+    //res.json(properties);
+    //res.json(responseMessage);
+    //res.render("/propertyList.html", { properties });
+    //res.sendFile(__dirname + "/propertyList.html");
+    const fileStream = fs.createReadStream(__dirname + "/propertyList.html");
+    fileStream.pipe(res);
   } catch {
     throw Error();
   }
 });
+
+//GET - search
+app.get("/search", (req, res) => {
+  const { address } = req.query;
+  let properties = [];
+  console.log(address);
+  if (fs.existsSync("properties.json")) {
+    let data = fs.readFileSync("properties.json", "utf8");
+
+    properties = JSON.parse(data);
+    if (!Array.isArray(properties)) {
+      properties = [];
+    }
+  }
+
+  let searchedList = [];
+  for (let i = 0; i < properties.length; i++) {
+    const myobj = properties[i].address;
+
+    if (address == myobj) {
+      let property = properties[i];
+      searchedList.push(property);
+      console.log(property);
+    }
+  }
+  res.json(searchedList);
+});
+
 //GET - each property
 app.get("/coworker/:id", (req, res) => {
   try {
@@ -73,7 +107,6 @@ app.get("/coworker/:id", (req, res) => {
       }
     }
     let property = properties.find((item) => (item.property_id = propertyId));
-    console.log(property);
 
     const responseMessage = {
       status: "success",
@@ -220,6 +253,7 @@ app.delete("/properties/:id", (req, res) => {
   res.status(204).send();
 });
 
-app.listen(8081, () => {
-  console.log("Example app listening on port 8081!");
+const port = 8081;
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}!`);
 });
