@@ -87,5 +87,63 @@
         "price": 100
       }
     ]
+  },
+  {
+    "propertyId": "b639d7bb-3997-4d27-b33d-296ac975166d",
+    "address": "28ave",
+    "neighborhood": "Tuxedo",
+    "squareFeet": 9876,
+    "hasParking": true,
+    "hasPublicTransit": true,
+    "workspace": [
+      {
+        "type": "meetingRoom",
+        "seats": 4,
+        "isSmokingAlowed": false,
+        "AvailabilityStart": "2023/12/12",
+        "AvailabilityEnd": "2023/12/14",
+        "leaseTerm": "day",
+        "price": 50
+      }
+    ]
+  },
+  {
+    "propertyId": "1bbd2330-5ddc-450e-8f19-b0be43c37fe1",
+    "address": "28ave",
+    "neighborhood": "Tuxedo",
+    "squareFeet": 9876,
+    "hasParking": true,
+    "hasPublicTransit": true,
+    "workspace": [
+      {
+        "type": "meetingRoom",
+        "seats": 4,
+        "isSmokingAlowed": false,
+        "AvailabilityStart": "2023/12/12",
+        "AvailabilityEnd": "2023/12/14",
+        "leaseTerm": "day",
+        "price": 50
+      }
+    ]
+  },
+  {
+    "propertyId": "9c9077ac-0945-4843-a526-ee40eabe657b",
+    "ownerId": "8613405d-e179-41da-bf53-80002e375dd1",
+    "address": "28ave",
+    "neighborhood": "Tuxedo",
+    "squareFeet": 9876,
+    "hasParking": true,
+    "hasPublicTransit": true,
+    "workspace": [
+      {
+        "type": "meetingRoom",
+        "seats": 4,
+        "isSmokingAlowed": false,
+        "AvailabilityStart": "2023/12/12",
+        "AvailabilityEnd": "2023/12/14",
+        "leaseTerm": "day",
+        "price": 50
+      }
+    ]
   }
 ]
