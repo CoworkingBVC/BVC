@@ -2,15 +2,17 @@ const { v4: uuidv4 } = require("uuid");
 const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
-const url = require("url");
 
 const fs = require("fs");
 
 const app = express();
 
+const cors = require("cors");
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(__dirname + "/public"));
+
+app.use(express.static("public")); // Assuming 'public' is the folder containing your HTML, CSS, and JS files
 
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/main.html");
@@ -35,6 +37,9 @@ app.post("/register", (req, res) => {
 
 /* coworker - jiwon*/
 //GET - display workspace
+/* app.get("/coworker", (req, res) => {
+  res.sendFile(__dirname + "/propertyList.html");
+}); */
 app.get("/coworker", async (req, res) => {
   try {
     let properties = [];
@@ -55,11 +60,9 @@ app.get("/coworker", async (req, res) => {
     console.log("server GET");
 
     //res.json(properties);
-    //res.json(responseMessage);
-    //res.render("/propertyList.html", { properties });
+    res.json(responseMessage);
+    //res.render("/propertyList.html");
     //res.sendFile(__dirname + "/propertyList.html");
-    const fileStream = fs.createReadStream(__dirname + "/propertyList.html");
-    fileStream.pipe(res);
   } catch {
     throw Error();
   }
