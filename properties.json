@@ -21,6 +21,7 @@
   },
   {
     "propertyId": "69c7277a-dfb4-402b-ad96-aee17112d26f",
+    "ownerId": "1",
     "address": "Walden123",
     "neighborhood": "Walden234",
     "squareFeet": 3556,
@@ -40,6 +41,7 @@
   },
   {
     "propertyId": "eea503a6-6718-4763-8666-f54daef7bbdc",
+    "ownerId": "4",
     "address": "9st",
     "neighborhood": "Beltline",
     "squareFeet": 35988,
