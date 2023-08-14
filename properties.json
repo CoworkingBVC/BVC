@@ -2,7 +2,7 @@
   {
     "propertyId": "bffa0de5-508d-4616-ad0f-1d71448b8591",
     "ownerId": "2",
-    "address": "Walden123",
+    "address": "Walden1234",
     "neighborhood": "Walden234",
     "squareFeet": 3556,
     "hasParking": true,
@@ -21,6 +21,7 @@
   },
   {
     "propertyId": "69c7277a-dfb4-402b-ad96-aee17112d26f",
+    "ownerId": "1",
     "address": "Walden123",
     "neighborhood": "Walden234",
     "squareFeet": 3556,
@@ -40,7 +41,8 @@
   },
   {
     "propertyId": "eea503a6-6718-4763-8666-f54daef7bbdc",
-    "address": "8st",
+    "ownerId": "4",
+    "address": "9st",
     "neighborhood": "Beltline",
     "squareFeet": 35988,
     "hasParking": true,
@@ -71,6 +73,73 @@
         "seats": 3,
         "isSmokingAlowed": true,
         "AvailabilityStart": "2023/12/7",
+        "AvailabilityEnd": "2023/12/14",
+        "leaseTerm": "day",
+        "price": 50
+      },
+      {
+        "type": "meetingRoom",
+        "seats": 6,
+        "isSmokingAlowed": false,
+        "AvailabilityStart": "2023/12/17",
+        "AvailabilityEnd": "2023/12/24",
+        "leaseTerm": "day",
+        "price": 100
+      }
+    ]
+  },
+  {
+    "propertyId": "b639d7bb-3997-4d27-b33d-296ac975166d",
+    "address": "28ave",
+    "neighborhood": "Tuxedo",
+    "squareFeet": 9876,
+    "hasParking": true,
+    "hasPublicTransit": true,
+    "workspace": [
+      {
+        "type": "meetingRoom",
+        "seats": 4,
+        "isSmokingAlowed": false,
+        "AvailabilityStart": "2023/12/12",
+        "AvailabilityEnd": "2023/12/14",
+        "leaseTerm": "day",
+        "price": 50
+      }
+    ]
+  },
+  {
+    "propertyId": "1bbd2330-5ddc-450e-8f19-b0be43c37fe1",
+    "address": "28ave",
+    "neighborhood": "Tuxedo",
+    "squareFeet": 9876,
+    "hasParking": true,
+    "hasPublicTransit": true,
+    "workspace": [
+      {
+        "type": "meetingRoom",
+        "seats": 4,
+        "isSmokingAlowed": false,
+        "AvailabilityStart": "2023/12/12",
+        "AvailabilityEnd": "2023/12/14",
+        "leaseTerm": "day",
+        "price": 50
+      }
+    ]
+  },
+  {
+    "propertyId": "9c9077ac-0945-4843-a526-ee40eabe657b",
+    "ownerId": "8613405d-e179-41da-bf53-80002e375dd1",
+    "address": "28ave",
+    "neighborhood": "Tuxedo",
+    "squareFeet": 9876,
+    "hasParking": true,
+    "hasPublicTransit": true,
+    "workspace": [
+      {
+        "type": "meetingRoom",
+        "seats": 4,
+        "isSmokingAlowed": false,
+        "AvailabilityStart": "2023/12/12",
         "AvailabilityEnd": "2023/12/14",
         "leaseTerm": "day",
         "price": 50

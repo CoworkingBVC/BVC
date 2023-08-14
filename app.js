@@ -1,13 +1,23 @@
 const { v4: uuidv4 } = require("uuid");
 const express = require("express");
 const bodyParser = require("body-parser");
+const path = require("path");
 
 const fs = require("fs");
 
 const app = express();
 
+const cors = require("cors");
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+
+app.use(express.static("public")); // Assuming 'public' is the folder containing your HTML, CSS, and JS files
+
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/main.html");
+});
 
 /* login - nya*/
 //POST - login
@@ -28,7 +38,10 @@ app.post("/register", (req, res) => {
 
 /* coworker - jiwon*/
 //GET - display workspace
-app.get("/coworker", (req, res) => {
+/* app.get("/coworker", (req, res) => {
+  res.sendFile(__dirname + "/propertyList.html");
+}); */
+app.get("/coworker", async (req, res) => {
   try {
     let properties = [];
 
@@ -45,12 +58,44 @@ app.get("/coworker", (req, res) => {
       status: "success",
       result: properties,
     };
+    console.log("server GET");
 
+    //res.json(properties);
     res.json(responseMessage);
+    //res.render("/propertyList.html");
+    //res.sendFile(__dirname + "/propertyList.html");
   } catch {
     throw Error();
   }
 });
+
+//GET - search
+app.get("/search", (req, res) => {
+  const { address } = req.query;
+  let properties = [];
+  console.log(address);
+  if (fs.existsSync("properties.json")) {
+    let data = fs.readFileSync("properties.json", "utf8");
+
+    properties = JSON.parse(data);
+    if (!Array.isArray(properties)) {
+      properties = [];
+    }
+  }
+
+  let searchedList = [];
+  for (let i = 0; i < properties.length; i++) {
+    const myobj = properties[i].address;
+
+    if (address == myobj) {
+      let property = properties[i];
+      searchedList.push(property);
+      console.log(property);
+    }
+  }
+  res.json(searchedList);
+});
+
 //GET - each property
 app.get("/coworker/:id", (req, res) => {
   try {
@@ -212,6 +257,7 @@ app.delete("/properties/:id", (req, res) => {
   res.status(204).send();
 });
 
-app.listen(8081, () => {
-  console.log("Example app listening on port 8081!");
+const port = 8081;
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}!`);
 });
