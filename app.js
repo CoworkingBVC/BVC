@@ -12,6 +12,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+
 app.use(express.static("public")); // Assuming 'public' is the folder containing your HTML, CSS, and JS files
 
 app.get("/", (req, res) => {
