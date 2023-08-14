@@ -2,7 +2,7 @@
   {
     "propertyId": "bffa0de5-508d-4616-ad0f-1d71448b8591",
     "ownerId": "2",
-    "address": "Walden123",
+    "address": "Walden1234",
     "neighborhood": "Walden234",
     "squareFeet": 3556,
     "hasParking": true,
@@ -40,7 +40,7 @@
   },
   {
     "propertyId": "eea503a6-6718-4763-8666-f54daef7bbdc",
-    "address": "8st",
+    "address": "9st",
     "neighborhood": "Beltline",
     "squareFeet": 35988,
     "hasParking": true,
@@ -74,6 +74,15 @@
         "AvailabilityEnd": "2023/12/14",
         "leaseTerm": "day",
         "price": 50
+      },
+      {
+        "type": "meetingRoom",
+        "seats": 6,
+        "isSmokingAlowed": false,
+        "AvailabilityStart": "2023/12/17",
+        "AvailabilityEnd": "2023/12/24",
+        "leaseTerm": "day",
+        "price": 100
       }
     ]
   }
