@@ -12,7 +12,6 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-
 app.use(express.static("public")); // Assuming 'public' is the folder containing your HTML, CSS, and JS files
 
 app.get("/", (req, res) => {
@@ -24,6 +23,14 @@ app.get("/", (req, res) => {
 
 /* signup - ody*/
 //POST - signup
+app.get("/main.html", (req, res) => {
+  res.sendFile(__dirname + "/main.html");
+});
+
+app.get("/signup.html", (req, res) => {
+  res.sendFile(__dirname + "/signup.html");
+});
+
 let userinfo = []; //Start with empty array
 if (fs.existsSync("users.json")) {
   let data = fs.readFileSync("users.json", "utf-8");
