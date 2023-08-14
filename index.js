@@ -23,6 +23,7 @@
           };
           postInfo(userinfo);
           showalert();
+          // location.replace("https://www.w3schools.com");
         }
 
         // Mark the form as validated, applying Bootstrap styles
@@ -36,15 +37,6 @@
   const newFooterContent = `<p class="mb-1">&copy; ${year} BVC CoWork</p>`;
 
   $("#myFooter").html(newFooterContent);
-
-  $("#myFooter").css({
-    // position: "fixed",
-    // bottom: "0",
-    // width: "100%",
-    "background-color": "white" /* Adjust the background color as needed */,
-    // padding: "10px",
-    // "text-align": "center",
-  });
 })();
 
 function postInfo(userinfo) {
@@ -62,11 +54,3 @@ function postInfo(userinfo) {
 function showalert() {
   alert("Registration Successful!");
 }
-
-// // the footer element
-// const footerElement = document.getElementById("myFooter");
-// const date = new Date();
-// let year = date.getFullYear();
-// const newFooterContent = `<p class="mb-1">&copy; ${year} BVC CoWork</p>`;
-
-// footerElement.innerHTML = newFooterContent;
