@@ -11,7 +11,7 @@
       {
         "type": "meetingRoom",
         "seats": 4,
-        "isSmokingAlowed": false,
+        "isSmokingAllowed": false,
         "AvailabilityStart": "2023/12/12",
         "AvailabilityEnd": "2023/12/14",
         "leaseTerm": "day",
@@ -31,7 +31,7 @@
       {
         "type": "meetingRoom",
         "seats": 4,
-        "isSmokingAlowed": false,
+        "isSmokingAllowed": false,
         "AvailabilityStart": "2023/12/12",
         "AvailabilityEnd": "2023/12/14",
         "leaseTerm": "day",
@@ -51,7 +51,7 @@
       {
         "type": "meetingRoom",
         "seats": 3,
-        "isSmokingAlowed": true,
+        "isSmokingAllowed": true,
         "AvailabilityStart": "2023/12/7",
         "AvailabilityEnd": "2023/12/14",
         "leaseTerm": "day",
@@ -71,7 +71,7 @@
       {
         "type": "meetingRoom",
         "seats": 3,
-        "isSmokingAlowed": true,
+        "isSmokingAllowed": true,
         "AvailabilityStart": "2023/12/7",
         "AvailabilityEnd": "2023/12/14",
         "leaseTerm": "day",
@@ -80,7 +80,7 @@
       {
         "type": "meetingRoom",
         "seats": 6,
-        "isSmokingAlowed": false,
+        "isSmokingAllowed": false,
         "AvailabilityStart": "2023/12/17",
         "AvailabilityEnd": "2023/12/24",
         "leaseTerm": "day",
@@ -99,7 +99,7 @@
       {
         "type": "meetingRoom",
         "seats": 4,
-        "isSmokingAlowed": false,
+        "isSmokingAllowed": false,
         "AvailabilityStart": "2023/12/12",
         "AvailabilityEnd": "2023/12/14",
         "leaseTerm": "day",
@@ -118,7 +118,7 @@
       {
         "type": "meetingRoom",
         "seats": 4,
-        "isSmokingAlowed": false,
+        "isSmokingAllowed": false,
         "AvailabilityStart": "2023/12/12",
         "AvailabilityEnd": "2023/12/14",
         "leaseTerm": "day",
@@ -138,7 +138,27 @@
       {
         "type": "meetingRoom",
         "seats": 4,
-        "isSmokingAlowed": false,
+        "isSmokingAllowed": false,
+        "AvailabilityStart": "2023/12/12",
+        "AvailabilityEnd": "2023/12/14",
+        "leaseTerm": "day",
+        "price": 50
+      }
+    ]
+  },
+  {
+    "propertyId": "9c9077ac-0945-4843-a526-ee40eabe657b",
+    "ownerId": "8613405d-e179-41da-bf53-80002e375dd1",
+    "address": "28ave",
+    "neighborhood": "Tuxedo",
+    "squareFeet": 9876,
+    "hasParking": false,
+    "hasPublicTransit": false,
+    "workspace": [
+      {
+        "type": "meetingRoom",
+        "seats": 4,
+        "isSmokingAllowed": false,
         "AvailabilityStart": "2023/12/12",
         "AvailabilityEnd": "2023/12/14",
         "leaseTerm": "day",
