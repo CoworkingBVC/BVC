@@ -2,6 +2,7 @@ const { v4: uuidv4 } = require("uuid");
 const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
+const PropertyManager = require("./PropertyManager");
 
 const fs = require("fs");
 
@@ -65,7 +66,6 @@ app.get("/coworker", async (req, res) => {
       status: "success",
       result: properties,
     };
-    console.log("server GET");
 
     //res.json(properties);
     res.json(responseMessage);
@@ -78,9 +78,24 @@ app.get("/coworker", async (req, res) => {
 
 //GET - search
 app.get("/search", (req, res) => {
-  const { address } = req.query;
+  //console.log("search");
+  const {
+    address,
+    neighborhood,
+    squareFeetMin,
+    squareFeetMax,
+    hasParking,
+    hasPublicTransit,
+    seats,
+    isSmokingAllowed,
+    AvailabilityStart,
+    AvailabilityEnd,
+    priceMin,
+    priceMax,
+  } = req.query;
+
   let properties = [];
-  console.log(address);
+
   if (fs.existsSync("properties.json")) {
     let data = fs.readFileSync("properties.json", "utf8");
 
@@ -90,17 +105,71 @@ app.get("/search", (req, res) => {
     }
   }
 
-  let searchedList = [];
-  for (let i = 0; i < properties.length; i++) {
-    const myobj = properties[i].address;
+  const propertyManager = new PropertyManager(properties);
 
-    if (address == myobj) {
-      let property = properties[i];
-      searchedList.push(property);
-      console.log(property);
+  const propertySearchOptions = {
+    address: req.query.address,
+    neighborhood: req.query.neighborhood,
+    squareFeet: [
+      parseInt(req.query.squareFeetMin),
+      parseInt(req.query.squareFeetMax),
+    ],
+    hasParking: req.query.hasParking === "true",
+    hasPublicTransit: req.query.hasPublicTransit === "true",
+  };
+
+  const workspaceSearchOptions = {
+    seats: parseInt(req.query.seats),
+    isSmokingAllowed: req.query.isSmokingAllowed === "true",
+    AvailabilityStart: req.query.AvailabilityStart,
+    AvailabilityEnd: req.query.AvailabilityEnd,
+    price: [parseInt(req.query.priceMin), parseInt(req.query.priceMax)],
+  };
+
+  function filterNonNaNOrUndefined(obj) {
+    const result = {};
+    for (const key in obj) {
+      switch (key) {
+        case "squareFeet":
+        case "price":
+          const [min, max] = obj[key];
+
+          if (!isNaN(min) || !isNaN(max)) {
+            result[key] = [!isNaN(min) ? min : 0, !isNaN(max) ? max : "Max"];
+          }
+          break;
+
+        case "seats":
+          if (!isNaN(obj[key])) {
+            result[key] = obj[key];
+          }
+          break;
+        default:
+          if (obj[key] !== undefined || !isNaN(obj[key])) {
+            result[key] = obj[key];
+          }
+      }
     }
+    return result;
   }
-  res.json(searchedList);
+
+  const filteredPropertySearchOptions = filterNonNaNOrUndefined(
+    propertySearchOptions
+  );
+  const filteredWorkspaceSearchOptions = filterNonNaNOrUndefined(
+    workspaceSearchOptions
+  );
+
+  const matchingWorkspaces = propertyManager.searchWorkspaces(
+    filteredPropertySearchOptions,
+    filteredWorkspaceSearchOptions
+  );
+
+  if (matchingWorkspaces.length > 0) {
+    res.json(matchingWorkspaces);
+  } else {
+    res.json({ message: "No matching workspaces found." });
+  }
 });
 
 //GET - each property
