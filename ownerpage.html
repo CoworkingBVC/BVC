@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"
+    ></script>
+    <title>Main Page</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="py-5 text-center">
+        <h2>Welcome to BVC CoWork</h2>
+        <p class="lead">
+          Here, you're in charge of list your properties effortlessly. Enjoy
+          full autonomy to modify, delist, or enhance property and workspace
+          details as you see fit. <br \ />
+          connect with a dynamic community of professionals through our
+          streamlined owner interface.
+        </p>
+      </div>
+    </div>
+    <div>
+      <a href="#" class="btn btn-secondary my-2">Add a property</a>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Address</th>
+          <th scope="col">Neighborhood</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Data rows info -->
+      </tbody>
+    </table>
+    <footer
+      id="myFooter"
+      class="footer mt-auto py-3 text-center bg-body-tertiary"
+    ></footer>
+    <script src="index.js"></script>
+    <script>
+      let ownerId = 2;
+      fetch(`http://127.0.0.1:8081/properties?ownerId=${ownerId}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => response.json())
+        .then((properties) => {
+          ownerInforTable(properties);
+        })
+        .catch((error) => {
+          console.error("Error saving data:", error);
+        });
+
+      function ownerInforTable(properties) {
+        properties.forEach(({ address, neighborhood }) => {
+          let row = $("<tr>");
+          const addressCell = $("<td>").text(address);
+          const neighborhoodCell = $("<td>").text(neighborhood);
+          const buttonCell = $("<td>");
+          const button = $("<button>");
+          button.addClass("btn-group btn btn-sm btn-outline-secondary");
+          buttonCell.append(button);
+          row.append(addressCell);
+          row.append(neighborhoodCell);
+          row.append(buttonCell);
+          const table = $(".table tbody");
+          table.append(row);
+        });
+      }
+    </script>
+  </body>
+</html>
