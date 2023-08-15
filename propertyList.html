@@ -1,0 +1,64 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BVC Property List</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1 id="title">BVC Property List</h1>
+      <button id="logout" type="submit" class="btn btn-primary">Logout</button>
+    </header>
+    <main>
+      <div id="search-box">
+        Property Address:
+        <input type="text" value="Please enter the address" id="address" />
+        <div id="date">
+          Start Date: <input type="date" id="start-date" /> End Date:
+          <input type="date" id="end-date" />
+        </div>
+        <form>
+          <label>
+            <input type="checkbox" name="option1" value="true" />
+            Parking
+          </label>
+          <label>
+            <input type="checkbox" name="option2" value="true" />
+            Public transit
+          </label>
+        </form>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+      <div id="sort-btn">
+        <button id="sort-size" class="btn btn-primary">Sort by Size</button>
+      </div>
+      <div id="properties-container">
+        <div id="property-box" class="card">
+          <a href="/property.html">
+            <img src="/images/31.jpg" class="card-img-top" />
+            <div class="card-body">
+              <h5 class="card-title">Property name</h5>
+              <div id="property-info">
+                <div class="address">Address</div>
+                <div class="neighborhood">Neighborhood</div>
+                <div class="parking">Parking</div>
+                <div class="transit">Transit</div>
+              </div>
+              <div id="price">$50/day</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </main>
+    <script src="/public/propertyList.js"></script>
+  </body>
+</html>

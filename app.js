@@ -1,30 +1,55 @@
 const { v4: uuidv4 } = require("uuid");
 const express = require("express");
 const bodyParser = require("body-parser");
+const path = require("path");
+const PropertyManager = require("./PropertyManager");
 
 const fs = require("fs");
 
 const app = express();
 
+const cors = require("cors");
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-/* for each page? */
-/* 
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html')
-})
- */
+app.use(express.static("public")); // Assuming 'public' is the folder containing your HTML, CSS, and JS files
+
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/main.html");
+});
 
 /* login - nya*/
 //POST - login
 
 /* signup - ody*/
 //POST - signup
+app.get("/main.html", (req, res) => {
+  res.sendFile(__dirname + "/main.html");
+});
+
+app.get("/signup.html", (req, res) => {
+  res.sendFile(__dirname + "/signup.html");
+});
+
+let userinfo = []; //Start with empty array
+if (fs.existsSync("users.json")) {
+  let data = fs.readFileSync("users.json", "utf-8");
+  userinfo = JSON.parse(data);
+}
+
+app.post("/register", (req, res) => {
+  userinfo.push({ id: uuidv4(), ...req.body });
+  fs.writeFileSync("users.json", JSON.stringify(userinfo));
+  res.sendStatus(200);
+});
 
 /* coworker - jiwon*/
 //GET - display workspace
-app.get("/coworker", (req, res) => {
+/* app.get("/coworker", (req, res) => {
+  res.sendFile(__dirname + "/propertyList.html");
+}); */
+app.get("/coworker", async (req, res) => {
   try {
     let properties = [];
 
@@ -42,11 +67,111 @@ app.get("/coworker", (req, res) => {
       result: properties,
     };
 
+    //res.json(properties);
     res.json(responseMessage);
+    //res.render("/propertyList.html");
+    //res.sendFile(__dirname + "/propertyList.html");
   } catch {
     throw Error();
   }
 });
+
+//GET - search
+app.get("/search", (req, res) => {
+  //console.log("search");
+  const {
+    address,
+    neighborhood,
+    squareFeetMin,
+    squareFeetMax,
+    hasParking,
+    hasPublicTransit,
+    seats,
+    isSmokingAllowed,
+    AvailabilityStart,
+    AvailabilityEnd,
+    priceMin,
+    priceMax,
+  } = req.query;
+
+  let properties = [];
+
+  if (fs.existsSync("properties.json")) {
+    let data = fs.readFileSync("properties.json", "utf8");
+
+    properties = JSON.parse(data);
+    if (!Array.isArray(properties)) {
+      properties = [];
+    }
+  }
+
+  const propertyManager = new PropertyManager(properties);
+
+  const propertySearchOptions = {
+    address: req.query.address,
+    neighborhood: req.query.neighborhood,
+    squareFeet: [
+      parseInt(req.query.squareFeetMin),
+      parseInt(req.query.squareFeetMax),
+    ],
+    hasParking: req.query.hasParking === "true",
+    hasPublicTransit: req.query.hasPublicTransit === "true",
+  };
+
+  const workspaceSearchOptions = {
+    seats: parseInt(req.query.seats),
+    isSmokingAllowed: req.query.isSmokingAllowed === "true",
+    AvailabilityStart: req.query.AvailabilityStart,
+    AvailabilityEnd: req.query.AvailabilityEnd,
+    price: [parseInt(req.query.priceMin), parseInt(req.query.priceMax)],
+  };
+
+  function filterNonNaNOrUndefined(obj) {
+    const result = {};
+    for (const key in obj) {
+      switch (key) {
+        case "squareFeet":
+        case "price":
+          const [min, max] = obj[key];
+
+          if (!isNaN(min) || !isNaN(max)) {
+            result[key] = [!isNaN(min) ? min : 0, !isNaN(max) ? max : "Max"];
+          }
+          break;
+
+        case "seats":
+          if (!isNaN(obj[key])) {
+            result[key] = obj[key];
+          }
+          break;
+        default:
+          if (obj[key] !== undefined || !isNaN(obj[key])) {
+            result[key] = obj[key];
+          }
+      }
+    }
+    return result;
+  }
+
+  const filteredPropertySearchOptions = filterNonNaNOrUndefined(
+    propertySearchOptions
+  );
+  const filteredWorkspaceSearchOptions = filterNonNaNOrUndefined(
+    workspaceSearchOptions
+  );
+
+  const matchingWorkspaces = propertyManager.searchWorkspaces(
+    filteredPropertySearchOptions,
+    filteredWorkspaceSearchOptions
+  );
+
+  if (matchingWorkspaces.length > 0) {
+    res.json(matchingWorkspaces);
+  } else {
+    res.json({ message: "No matching workspaces found." });
+  }
+});
+
 //GET - each property
 app.get("/coworker/:id", (req, res) => {
   try {
@@ -62,7 +187,6 @@ app.get("/coworker/:id", (req, res) => {
       }
     }
     let property = properties.find((item) => (item.property_id = propertyId));
-    console.log(property);
 
     const responseMessage = {
       status: "success",
@@ -209,6 +333,7 @@ app.delete("/properties/:id", (req, res) => {
   res.status(204).send();
 });
 
-app.listen(8081, () => {
-  console.log("Example app listening on port 8081!");
+const port = 8081;
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}!`);
 });
