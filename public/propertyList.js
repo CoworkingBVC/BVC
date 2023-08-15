@@ -14,7 +14,7 @@ $(document).ready(function () {
   });
 });
 
-//Display
+//Display properties
 function DisplayPropertyList(data) {
   const PropertyContainer = document.getElementById("properties-container");
 
@@ -41,3 +41,7 @@ function DisplayPropertyList(data) {
     PropertyContainer.appendChild(propertyBox);
   });
 }
+
+//Sort by size
+
+//Search by address, nei, size, parking, public, trans,
