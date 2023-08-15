@@ -140,7 +140,7 @@
       {
         "type": "meetingRoom",
         "seats": 4,
-        "isSmokingAllowed": true,
+        "isSmokingAllowed": false,
         "AvailabilityStart": "2023/12/12",
         "AvailabilityEnd": "2023/12/14",
         "leaseTerm": "day",

@@ -64,7 +64,7 @@ class PropertyManager {
   }
 
   _valueCheck(propertyValue, optionValue) {
-    let result = propertyValue === optionValue;
+    let result = propertyValue === optionValue || optionValue == "";
 
     return result;
   }

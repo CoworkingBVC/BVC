@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
 const PropertyManager = require("./PropertyManager");
+const handlebars = require("handlebars");
 
 const fs = require("fs");
 
@@ -41,6 +42,7 @@ app.post("/register", (req, res) => {
 /* app.get("/coworker", (req, res) => {
   res.sendFile(__dirname + "/propertyList.html");
 }); */
+
 app.get("/coworker", async (req, res) => {
   try {
     let properties = [];
@@ -52,6 +54,7 @@ app.get("/coworker", async (req, res) => {
       result: properties,
     };
 
+    //res.send(html);
     //res.json(properties);
     res.json(responseMessage);
     //res.render("/propertyList.html");
