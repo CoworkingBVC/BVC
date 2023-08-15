@@ -86,22 +86,19 @@ app.get("/search", (req, res) => {
   const propertyManager = new PropertyManager(properties);
 
   const propertySearchOptions = {
-    address: req.query.address,
-    neighborhood: req.query.neighborhood,
-    squareFeet: [
-      parseInt(req.query.squareFeetMin),
-      parseInt(req.query.squareFeetMax),
-    ],
-    hasParking: req.query.hasParking === "true",
-    hasPublicTransit: req.query.hasPublicTransit === "true",
+    address: address,
+    neighborhood: neighborhood,
+    squareFeet: [parseInt(squareFeetMin), parseInt(squareFeetMax)],
+    hasParking: hasParking === "true",
+    hasPublicTransit: hasPublicTransit === "true",
   };
 
   const workspaceSearchOptions = {
-    seats: parseInt(req.query.seats),
-    isSmokingAllowed: req.query.isSmokingAllowed === "true",
-    AvailabilityStart: req.query.AvailabilityStart,
-    AvailabilityEnd: req.query.AvailabilityEnd,
-    price: [parseInt(req.query.priceMin), parseInt(req.query.priceMax)],
+    seats: parseInt(seats),
+    isSmokingAllowed: isSmokingAllowed === "true",
+    AvailabilityStart: AvailabilityStart,
+    AvailabilityEnd: AvailabilityEnd,
+    price: [parseInt(priceMin), parseInt(priceMax)],
   };
 
   function filterNonNaNOrUndefined(obj) {
