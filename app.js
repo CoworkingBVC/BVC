@@ -111,16 +111,13 @@ app.get("/search", (req, res) => {
   };
 
   const workspaceSearchOptions = {
-    seats: parseInt(req.query.seats), //1~5, 6~10. 11~20, 21~
+    seats: parseInt(req.query.seats),
     isSmokingAllowed: req.query.isSmokingAllowed === "true",
     AvailabilityStart: req.query.AvailabilityStart,
     AvailabilityEnd: req.query.AvailabilityEnd,
     price: [parseInt(req.query.priceMin), parseInt(req.query.priceMax)],
   };
 
-  /*   console.log("propertySearchOptions", propertySearchOptions);
-  console.log("workspaceSearchOptions", workspaceSearchOptions);
- */
   function filterNonNaNOrUndefined(obj) {
     const result = {};
     for (const key in obj) {
