@@ -45,14 +45,7 @@ app.get("/coworker", async (req, res) => {
   try {
     let properties = [];
 
-    if (fs.existsSync("properties.json")) {
-      let data = fs.readFileSync("properties.json", "utf8");
-
-      properties = JSON.parse(data);
-      if (!Array.isArray(properties)) {
-        properties = [];
-      }
-    }
+    properties = ReadData();
 
     const responseMessage = {
       status: "success",
@@ -88,14 +81,7 @@ app.get("/search", (req, res) => {
 
   let properties = [];
 
-  if (fs.existsSync("properties.json")) {
-    let data = fs.readFileSync("properties.json", "utf8");
-
-    properties = JSON.parse(data);
-    if (!Array.isArray(properties)) {
-      properties = [];
-    }
-  }
+  properties = ReadData();
 
   const propertyManager = new PropertyManager(properties);
 
@@ -164,25 +150,29 @@ app.get("/search", (req, res) => {
   }
 });
 
-//GET - each property
+//GET - each workspace
 app.get("/coworker/:id", (req, res) => {
+  //if the user clicks a worksapce, it will show the owner info
   try {
     let propertyId = req.params.id;
     let properties = [];
+    properties = ReadData();
 
-    if (fs.existsSync("properties.json")) {
-      let data = fs.readFileSync("properties.json", "utf8");
+    let property = properties.find((item) => item.propertyId == propertyId);
+    let ownerId = property.ownerId;
 
-      properties = JSON.parse(data);
-      if (!Array.isArray(properties)) {
-        properties = [];
-      }
+    let userinfo = [];
+    if (fs.existsSync("users.json")) {
+      let data = fs.readFileSync("users.json", "utf-8");
+      userinfo = JSON.parse(data);
     }
-    let property = properties.find((item) => (item.property_id = propertyId));
+
+    let ownerInfo = userinfo.find((owner) => owner.id == ownerId);
 
     const responseMessage = {
       status: "success",
-      result: property,
+      result: ownerInfo,
+      propertyId,
     };
 
     res.json(responseMessage);
@@ -190,6 +180,18 @@ app.get("/coworker/:id", (req, res) => {
     throw Error();
   }
 });
+
+function ReadData() {
+  if (fs.existsSync("properties.json")) {
+    let data = fs.readFileSync("properties.json", "utf8");
+
+    properties = JSON.parse(data);
+    if (!Array.isArray(properties)) {
+      properties = [];
+    }
+  }
+  return properties;
+}
 
 /* owner -jhenyffer*/
 //POST - add a new property
