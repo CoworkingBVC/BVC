@@ -4,6 +4,8 @@ class PropertyManager {
   }
 
   searchWorkspaces(propertySearchOptions, workspaceSearchOptions) {
+    console.log("propertySearchOptions", propertySearchOptions);
+    console.log("workspaceSearchOptions", workspaceSearchOptions);
     const results = [];
 
     for (const property of this.properties) {
@@ -35,6 +37,21 @@ class PropertyManager {
             IsMatched &&
             this._rangeCheck(dataValue, optionValue[0], optionValue[1]);
           break;
+        case "AvailabilityStart":
+          let startDate = new Date(dataValue);
+          IsMatched =
+            IsMatched &&
+            !isNaN(startDate.getTime()) &&
+            new Date(optionValue) >= startDate;
+          break;
+        case "AvailabilityEnd":
+          let endDate = new Date(dataValue);
+          IsMatched =
+            IsMatched &&
+            !isNaN(endDate.getTime()) &&
+            new Date(optionValue) <= endDate;
+          break;
+
         default:
           IsMatched = IsMatched && this._valueCheck(dataValue, optionValue);
       }
