@@ -1,29 +1,9 @@
 [
   {
-    "propertyId": "bffa0de5-508d-4616-ad0f-1d71448b8591",
-    "ownerId": "2",
-    "address": "Walden1234",
-    "neighborhood": "Walden234",
-    "squareFeet": 3556,
-    "hasParking": true,
-    "hasPublicTransit": true,
-    "workspace": [
-      {
-        "type": "meetingRoom",
-        "seats": 4,
-        "isSmokingAllowed": false,
-        "AvailabilityStart": "2023/12/12",
-        "AvailabilityEnd": "2023/12/14",
-        "leaseTerm": "day",
-        "price": 50
-      }
-    ]
-  },
-  {
     "propertyId": "69c7277a-dfb4-402b-ad96-aee17112d26f",
-    "ownerId": "1",
-    "address": "Walden123",
-    "neighborhood": "Walden234",
+    "ownerId": "2",
+    "address": "20th Street",
+    "neighborhood": "Seton",
     "squareFeet": 3556,
     "hasParking": true,
     "hasPublicTransit": true,

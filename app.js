@@ -328,9 +328,8 @@ app.delete("/properties/:id", (req, res) => {
   } else {
     propertyData.splice(propertyIndex, 1);
     savePropertyData(propertyData);
+    res.status(204).send();
   }
-
-  res.status(204).send();
 });
 
 const port = 8081;
