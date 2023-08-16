@@ -13,8 +13,7 @@ const cors = require("cors");
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
-app.use(express.static("public")); // Assuming 'public' is the folder containing your HTML, CSS, and JS files
+app.use(express.static("images"));
 
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/main.html");
@@ -46,6 +45,24 @@ app.post("/register", (req, res) => {
 });
 
 /* coworker - jiwon*/
+
+app.get("/propertyList.html", (req, res) => {
+  res.sendFile(__dirname + "/propertyList.html");
+});
+
+app.get("/property.html", (req, res) => {
+  res.sendFile(__dirname + "/property.html");
+});
+
+app.get("/propertyList.js", (req, res) => {
+  res.sendFile(__dirname + "/propertyList.js");
+});
+
+app.get("/style.css", (req, res) => {
+  res.setHeader("Content-Type", "text/css");
+  res.sendFile(path.join(__dirname, "style.css"));
+});
+
 app.get("/coworker", async (req, res) => {
   try {
     let properties = [];

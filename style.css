@@ -66,3 +66,12 @@ button#workspace-box-btn {
 #hide-id {
   display: none;
 }
+
+#user-info-container {
+  margin: 0 5%;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
