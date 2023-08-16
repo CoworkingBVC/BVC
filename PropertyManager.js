@@ -22,8 +22,8 @@ class PropertyManager {
               type: workspace.type,
               seats: workspace.seats,
               isSmokingAllowed: workspace.isSmokingAllowed,
-              AvailabilityStart: workspace.AvailabilityStart,
-              AvailabilityEnd: workspace.AvailabilityEnd,
+              AvailabilityStart: workspace.availabilityStart,
+              AvailabilityEnd: workspace.availabilityEnd,
               leaseTerm: workspace.leaseTerm,
               price: workspace.price,
             };

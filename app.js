@@ -44,7 +44,6 @@ app.get("/viewProperties.html", (req, res) => {
   res.sendFile(__dirname + "/viewProperties.html");
 });
 
-
 let userinfo = []; //Start with empty array
 if (fs.existsSync("users.json")) {
   let data = fs.readFileSync("users.json", "utf-8");
@@ -94,8 +93,8 @@ app.get("/coworker", async (req, res) => {
           type: properties[i].workspace[k].type,
           seats: properties[i].workspace[k].seats,
           isSmokingAllowed: properties[i].workspace[k].isSmokingAllowed,
-          AvailabilityStart: properties[i].workspace[k].availabilityStart,
-          AvailabilityEnd: properties[i].workspace[k].availabilityEnd,
+          availabilityStart: properties[i].workspace[k].availabilityStart,
+          availabilityEnd: properties[i].workspace[k].availabilityEnd,
           leaseTerm: properties[i].workspace[k].leaseTerm,
           price: properties[i].workspace[k].price,
         };
