@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
 const PropertyManager = require("./PropertyManager");
+const handlebars = require("handlebars");
 
 const fs = require("fs");
 
@@ -12,8 +13,7 @@ const cors = require("cors");
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
-app.use(express.static("public")); // Assuming 'public' is the folder containing your HTML, CSS, and JS files
+app.use(express.static("images"));
 
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/main.html");
@@ -45,32 +45,57 @@ app.post("/register", (req, res) => {
 });
 
 /* coworker - jiwon*/
-//GET - display workspace
-/* app.get("/coworker", (req, res) => {
+
+app.get("/propertyList.html", (req, res) => {
   res.sendFile(__dirname + "/propertyList.html");
-}); */
+});
+
+app.get("/property.html", (req, res) => {
+  res.sendFile(__dirname + "/property.html");
+});
+
+app.get("/propertyList.js", (req, res) => {
+  res.sendFile(__dirname + "/propertyList.js");
+});
+
+app.get("/style.css", (req, res) => {
+  res.setHeader("Content-Type", "text/css");
+  res.sendFile(path.join(__dirname, "style.css"));
+});
+
 app.get("/coworker", async (req, res) => {
   try {
     let properties = [];
 
-    if (fs.existsSync("properties.json")) {
-      let data = fs.readFileSync("properties.json", "utf8");
-
-      properties = JSON.parse(data);
-      if (!Array.isArray(properties)) {
-        properties = [];
+    properties = ReadData();
+    let workspaces = [];
+    for (let i = 0; i < properties.length; i++) {
+      for (let k = 0; k < properties[i].workspace.length; k++) {
+        let worksapceWithPropertyInfo = {
+          propertyId: properties[i].propertyId,
+          address: properties[i].address,
+          neighborhood: properties[i].neighborhood,
+          squareFeet: properties[i].squareFeet,
+          hasParking: properties[i].hasParking,
+          hasPublicTransit: properties[i].hasPublicTransit,
+          type: properties[i].workspace[k].type,
+          seats: properties[i].workspace[k].seats,
+          isSmokingAllowed: properties[i].workspace[k].isSmokingAllowed,
+          AvailabilityStart: properties[i].workspace[k].AvailabilityStart,
+          AvailabilityEnd: properties[i].workspace[k].AvailabilityEnd,
+          leaseTerm: properties[i].workspace[k].leaseTerm,
+          price: properties[i].workspace[k].price,
+        };
+        workspaces.push(worksapceWithPropertyInfo);
       }
     }
 
     const responseMessage = {
       status: "success",
-      result: properties,
+      result: workspaces,
     };
 
-    //res.json(properties);
     res.json(responseMessage);
-    //res.render("/propertyList.html");
-    //res.sendFile(__dirname + "/propertyList.html");
   } catch {
     throw Error();
   }
@@ -96,34 +121,24 @@ app.get("/search", (req, res) => {
 
   let properties = [];
 
-  if (fs.existsSync("properties.json")) {
-    let data = fs.readFileSync("properties.json", "utf8");
-
-    properties = JSON.parse(data);
-    if (!Array.isArray(properties)) {
-      properties = [];
-    }
-  }
+  properties = ReadData();
 
   const propertyManager = new PropertyManager(properties);
 
   const propertySearchOptions = {
-    address: req.query.address,
-    neighborhood: req.query.neighborhood,
-    squareFeet: [
-      parseInt(req.query.squareFeetMin),
-      parseInt(req.query.squareFeetMax),
-    ],
-    hasParking: req.query.hasParking === "true",
-    hasPublicTransit: req.query.hasPublicTransit === "true",
+    address: address,
+    neighborhood: neighborhood,
+    squareFeet: [parseInt(squareFeetMin), parseInt(squareFeetMax)],
+    hasParking: hasParking === "true",
+    hasPublicTransit: hasPublicTransit === "true",
   };
 
   const workspaceSearchOptions = {
-    seats: parseInt(req.query.seats),
-    isSmokingAllowed: req.query.isSmokingAllowed === "true",
-    AvailabilityStart: req.query.AvailabilityStart,
-    AvailabilityEnd: req.query.AvailabilityEnd,
-    price: [parseInt(req.query.priceMin), parseInt(req.query.priceMax)],
+    seats: parseInt(seats),
+    isSmokingAllowed: isSmokingAllowed === "true",
+    AvailabilityStart: AvailabilityStart,
+    AvailabilityEnd: AvailabilityEnd,
+    price: [parseInt(priceMin), parseInt(priceMax)],
   };
 
   function filterNonNaNOrUndefined(obj) {
@@ -166,31 +181,40 @@ app.get("/search", (req, res) => {
   );
 
   if (matchingWorkspaces.length > 0) {
-    res.json(matchingWorkspaces);
+    const responseMessage = {
+      status: "success",
+      result: matchingWorkspaces,
+    };
+
+    res.json(responseMessage);
   } else {
     res.json({ message: "No matching workspaces found." });
   }
 });
 
-//GET - each property
+//GET - each workspace
 app.get("/coworker/:id", (req, res) => {
+  //if the user clicks a worksapce, it will show the owner info
   try {
     let propertyId = req.params.id;
     let properties = [];
+    properties = ReadData();
 
-    if (fs.existsSync("properties.json")) {
-      let data = fs.readFileSync("properties.json", "utf8");
+    let property = properties.find((item) => item.propertyId == propertyId);
+    let ownerId = property.ownerId;
 
-      properties = JSON.parse(data);
-      if (!Array.isArray(properties)) {
-        properties = [];
-      }
+    let userinfo = [];
+    if (fs.existsSync("users.json")) {
+      let data = fs.readFileSync("users.json", "utf-8");
+      userinfo = JSON.parse(data);
     }
-    let property = properties.find((item) => (item.property_id = propertyId));
+
+    let ownerInfo = userinfo.find((owner) => owner.id == ownerId);
 
     const responseMessage = {
       status: "success",
-      result: property,
+      result: ownerInfo,
+      propertyId,
     };
 
     res.json(responseMessage);
@@ -198,6 +222,18 @@ app.get("/coworker/:id", (req, res) => {
     throw Error();
   }
 });
+
+function ReadData() {
+  if (fs.existsSync("properties.json")) {
+    let data = fs.readFileSync("properties.json", "utf8");
+
+    properties = JSON.parse(data);
+    if (!Array.isArray(properties)) {
+      properties = [];
+    }
+  }
+  return properties;
+}
 
 /* owner -jhenyffer*/
 //POST - add a new property

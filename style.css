@@ -14,15 +14,25 @@ header {
   justify-content: space-between;
 }
 
-main div#search-box {
+main #search-form {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   margin: 0 5%;
   padding: 10px;
 }
 
-main input#address {
-  width: 250px;
+main input {
+  margin-bottom: 5px;
+  margin-right: 10px;
+}
+
+input[type="text"] {
+  width: 230px;
+}
+
+input[type="number"] {
+  width: 100px;
 }
 
 #sort-btn {
@@ -30,7 +40,7 @@ main input#address {
   padding: 10px;
 }
 
-div#properties-container {
+div#workspaces-container {
   margin: 0 5%;
   padding: 10px;
   display: flex;
@@ -39,16 +49,29 @@ div#properties-container {
   justify-content: space-between;
 }
 
-#property-box {
+#workspace-box {
   padding: 10px;
   margin-bottom: 10px;
   width: 30%;
 }
 
-#property-box a div {
+a {
   text-decoration: none;
 }
 
-a {
-  text-decoration: none;
+button#workspace-box-btn {
+  border: 0 solid;
+}
+
+#hide-id {
+  display: none;
+}
+
+#user-info-container {
+  margin: 0 5%;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }

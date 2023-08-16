@@ -12,10 +12,22 @@ class PropertyManager {
       if (this._dataMatchesOptions(property, propertySearchOptions)) {
         for (const workspace of property.workspace) {
           if (this._dataMatchesOptions(workspace, workspaceSearchOptions)) {
-            results.push({
+            let worksapceWithPropertyInfo = {
               propertyId: property.propertyId,
-              workspace: workspace,
-            });
+              address: property.address,
+              neighborhood: property.neighborhood,
+              squareFeet: property.squareFeet,
+              hasParking: property.hasParking,
+              hasPublicTransit: property.hasPublicTransit,
+              type: workspace.type,
+              seats: workspace.seats,
+              isSmokingAllowed: workspace.isSmokingAllowed,
+              AvailabilityStart: workspace.AvailabilityStart,
+              AvailabilityEnd: workspace.AvailabilityEnd,
+              leaseTerm: workspace.leaseTerm,
+              price: workspace.price,
+            };
+            results.push(worksapceWithPropertyInfo);
           }
         }
       }
@@ -64,7 +76,7 @@ class PropertyManager {
   }
 
   _valueCheck(propertyValue, optionValue) {
-    let result = propertyValue === optionValue;
+    let result = propertyValue === optionValue || optionValue == "";
 
     return result;
   }
