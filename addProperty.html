@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add a property</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"
+    ></script>
+    <script src="utils.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="py-5 text-center">
+        <h2>Have a property?</h2>
+        <p class="lead">
+          Add Your Property to Our Coworking Network. Provide essential details
+          such as address, square footage, parking availability, and public
+          transportation accessibility. <br \ />
+          Let your property become a hub of collaboration and innovation.
+        </p>
+      </div>
+    </div>
+    <form>
+      <div class="form-group row">
+        <label for="address" class="col-sm-2 col-form-label">Address</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="address" />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="neighborhood" class="col-sm-2 col-form-label"
+          >Neighborhood</label
+        >
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="neighborhood" />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="squareFeet" class="col-sm-2 col-form-label"
+          >Square Feet</label
+        >
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="squareFeet" />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="hasParking" class="col-sm-2 col-form-label"
+          >Does it has parking?</label
+        >
+        <select id="hasParking" class="form-control-select col-sm-9">
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+        </select>
+      </div>
+
+      <div class="form-group row">
+        <label for="hasPublicTransit" class="col-sm-2 col-form-label"
+          >Does it has public transit?</label
+        >
+        <select id="hasPublicTransit" class="form-control-select col-sm-9">
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+        </select>
+      </div>
+    </form>
+
+    <form>
+      <div class="form-group row">
+        <h3>Workspaces</h3>
+      </div>
+      <div id="workspaces"></div>
+
+      <div class="form-group row">
+        <label for="inputType" class="col-sm-2 col-form-label">Type</label>
+        <select id="inputType" class="form-control-select col-sm-9">
+          <option value="meetingRoom">Meeting Room</option>
+          <option value="privateOfficeRoom">Private Office Room</option>
+          <option value="desk">Desk(open area)</option>
+        </select>
+      </div>
+
+      <div class="form-group row">
+        <label for="seats" class="col-sm-2 col-form-label"
+          >How many seats:</label
+        >
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="seats" />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="isSmokingAllowed" class="col-sm-2 col-form-label"
+          >Is Smoking Allowed:</label
+        >
+        <select id="isSmokingAllowed" class="form-control-select col-sm-9">
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+        </select>
+      </div>
+
+      <div class="form-group row">
+        <label for="availabilityStart" class="col-sm-2 col-form-label"
+          >Availability Start:</label
+        >
+        <div class="col-sm-10">
+          <input type="date" class="form-control" id="availabilityStart" />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="availabilityEnd" class="col-sm-2 col-form-label"
+          >Availability End:</label
+        >
+        <div class="col-sm-10">
+          <input type="date" class="form-control" id="availabilityEnd" />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="leaseTerm" class="col-sm-2 col-form-label"
+          >Lease Term:</label
+        >
+        <select id="leaseTerm" class="form-control-select col-sm-9">
+          <option value="day">Day</option>
+          <option value="week">Week</option>
+          <option value="month">Month</option>
+        </select>
+      </div>
+
+      <div class="form-group row">
+        <label for="price" class="col-sm-2 col-form-label">Price:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="price" />
+        </div>
+      </div>
+    </form>
+
+    <button id="addWorkspaceButton" class="btn btn-secondary btn-sm">
+      Add Workspace
+    </button>
+
+    <div id="workspaceList"></div>
+
+    <button id="saveWorkspaceButton" class="btn btn-secondary btn-sm">
+      Save
+    </button>
+
+    <script>
+      (() => {
+        const ownerId = utilities.getOwnerId();
+        let workspaceList = [];
+
+        function saveAndDisplayWorkspace() {
+          const workspace = {
+            type: $("#inputType").val(),
+            seats: $("#seats").val(),
+            isSmokingAllowed: $("#isSmokingAllowed").val(),
+            availabilityStart: $("#availabilityStart").val(),
+            availabilityEnd: $("#availabilityEnd").val(),
+            leaseTerm: $("#leaseTerm").val(),
+            price: $("#price").val(),
+          };
+          workspaceList.push(workspace);
+          displayAllWorkspace();
+        }
+
+        const addButton = $("#addWorkspaceButton");
+
+        addButton.on("click", () => {
+          saveAndDisplayWorkspace();
+        });
+
+        function displayAllWorkspace() {
+          $("#workspaceList").empty();
+          workspaceList.forEach((workspace, index) => {
+            displayWorkspaceHtml(workspace, index);
+          });
+        }
+
+        function displayWorkspaceHtml(workspace, index) {
+          $("#workspaceList").append(
+            `<div class="py-5">
+        <div class="form-group row">
+        <label for="inputType-${index}" class="col-sm-2 col-form-label">Type</label>
+        <select id="inputType-${index}" disabled class="form-control-select col-sm-9">
+          <option selected>Choose...</option>
+          <option value="meetingRoom">Meeting Room</option>
+          <option value="privateOfficeRoom">Private Office Room</option>
+          <option value="desk">Desk(open area)</option>
+        </select>
+      </div>
+
+      <div class="form-group row">
+        <label for="seats" class="col-sm-2 col-form-label"
+          >How many seats:</label
+        >
+        <div class="col-sm-10">
+          <input readonly type="text" class="form-control" id="seats" value="${workspace.seats}"/>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="isSmokingAllowed-${index}" class="col-sm-2 col-form-label"
+          >Is Smoking Allowed:</label
+        >
+        <select id="isSmokingAllowed-${index}" disabled class="form-control-select col-sm-9">
+          <option selected>Choose...</option>
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+        </select>
+      </div>
+
+      <div class="form-group row">
+        <label for="availabilityStart" class="col-sm-2 col-form-label"
+          >Availability Start:</label
+        >
+        <div class="col-sm-10">
+          <input
+          readonly
+            type="date"
+            class="form-control"
+            id="availabilityStart"
+            value="${workspace.availabilityStart}"
+          />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="availabilityEnd" class="col-sm-2 col-form-label"
+          >Availability End:</label
+        >
+        <div class="col-sm-10">
+          <input
+          readonly
+            type="date"
+            class="form-control"
+            id="availabilityEnd"
+            value="${workspace.availabilityEnd}"
+          />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="leaseTerm-${index}" class="col-sm-2 col-form-label"
+          >Lease Term:</label
+        >
+        <select id="leaseTerm-${index}" disabled class="form-control-select col-sm-9">
+          <option selected>Choose...</option>
+          <option value="day">Day</option>
+          <option value="week">Week</option>
+          <option value="month">Month</option>
+        </select>
+      </div>
+
+      <div class="form-group row">
+        <label for="price" class="col-sm-2 col-form-label">Price:</label>
+        <div class="col-sm-10">
+          <input readonly type="text" class="form-control" id="price" value="${workspace.price}" />
+        </div>
+      </div>
+      <button id="deleteWorkspace-${index}" class="btn btn-outline-danger">
+        Delete Workspace
+      </button>
+      </div>`
+          );
+          $(`#leaseTerm-${index}`).val(workspace.leaseTerm);
+          $(`#inputType-${index}`).val(workspace.type);
+          $(`#isSmokingAllowed-${index}`).val(
+            String(workspace.isSmokingAllowed)
+          );
+          $(`#deleteWorkspace-${index}`).on("click", () => {
+            workspaceList.splice(index, 1);
+            displayAllWorkspace();
+          });
+        }
+
+        $("#saveWorkspaceButton").on("click", () => {
+          const propertyInfo = {
+            address: $("#address").val(),
+            neighborhood: $("#neighborhood").val(),
+            squareFeet: $("#squareFeet").val(),
+            hasParking: $("#hasParking").val() == "true",
+            hasPublicTransit: $("#hasPublicTransit").val() == "true",
+            workspace: workspaceList,
+          };
+          saveProperty(propertyInfo);
+        });
+
+        function saveProperty(propertyInfo) {
+          fetch(`http://127.0.0.1:8081/properties?ownerId=${ownerId}`, {
+            method: "POST",
+            body: JSON.stringify(propertyInfo),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then((res) => {
+              if (res.status < 200 || res.status > 299) {
+                throw new Error(res.statusText);
+              }
+              alert("Property Added successfully.");
+
+              window.location.href = "ownerpage.html";
+            })
+            .catch((error) => {
+              alert("Error Adding property: " + error);
+            });
+        }
+      })();
+    </script>
+  </body>
+</html>

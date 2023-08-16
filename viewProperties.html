@@ -29,7 +29,7 @@
       </div>
     </div>
 
-    <form>
+    <form class="px-3">
       <div class="form-group row">
         <label for="propertyId" class="col-sm-2 col-form-label"
           >Property Id</label
@@ -86,7 +86,7 @@
 
       <div class="form-group row">
         <label for="parking" class="col-sm-2 col-form-label"
-          >Has Parking?</label
+          >Does it has parking?</label
         >
         <div class="col-sm-10">
           <input
@@ -100,7 +100,7 @@
 
       <div class="form-group row">
         <label for="publicTransit" class="col-sm-2 col-form-label"
-          >Has Public Transit?</label
+          >Does it has public transit?</label
         >
         <div class="col-sm-10">
           <input
@@ -113,7 +113,7 @@
       </div>
 
       <div class="form-group row">
-        <h1 for="workspace" class="col-sm-2 col-form-label">Workspace</h1>
+        <h3>Workspaces</h3>
       </div>
       <div id="workspaces"></div>
     </form>
@@ -121,58 +121,59 @@
       id="myFooter"
       class="footer mt-auto py-3 text-center bg-body-tertiary"
     ></footer>
-
-    <script src="index.js"></script>
+    <script src="utils.js"></script>
     <script>
-      let ownerId = 2;
-      const urlParams = new URLSearchParams(window.location.search);
-      const propertyId = urlParams.get("propertyId");
-      console.log(propertyId);
-      fetch(
-        `http://127.0.0.1:8081/properties/${propertyId}?ownerId=${ownerId}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
+      (() => {
+        const ownerId = utilities.getOwnerId();
+        const urlParams = new URLSearchParams(window.location.search);
+        const propertyId = urlParams.get("propertyId");
+        console.log(propertyId);
+        fetch(
+          `http://127.0.0.1:8081/properties/${propertyId}?ownerId=${ownerId}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+          .then((response) => response.json())
+          .then((response) => {
+            ownerPropertyOnlyReadForm(response);
+          })
+          .catch((error) => {
+            console.error("Error saving data:", error);
+          });
+
+        function ownerPropertyOnlyReadForm(property) {
+          const {
+            propertyId,
+            ownerId,
+            address,
+            neighborhood,
+            squareFeet,
+            hasParking,
+            hasPublicTransit,
+            workspace,
+          } = property;
+          $("#propertyId").val(propertyId);
+          $("#address").val(address);
+          $("#neighborhood").val(neighborhood);
+          $("#squareFeet").val(squareFeet);
+          $("#parking").val(hasParking ? "Yes" : "No");
+          $("#publicTransit").val(hasPublicTransit ? "Yes" : "No");
+
+          workspace.forEach((workspace, index) => {
+            createWorkspaceHtml(workspace, index); //garantee that all workspace of a property will be displayed 
+          });
         }
-      )
-        .then((response) => response.json())
-        .then((response) => {
-          ownerPropertyOnlyReadForm(response);
-        })
-        .catch((error) => {
-          console.error("Error saving data:", error);
-        });
 
-      function ownerPropertyOnlyReadForm(property) {
-        const {
-          propertyId,
-          ownerId,
-          address,
-          neighborhood,
-          squareFeet,
-          hasParking,
-          hasPublicTransit,
-          workspace,
-        } = property;
-        $("#propertyId").val(propertyId);
-        $("#address").val(address);
-        $("#neighborhood").val(neighborhood);
-        $("#squareFeet").val(squareFeet);
-        $("#parking").val(hasParking ? "Yes" : "No");
-        $("#publicTransit").val(hasPublicTransit ? "Yes" : "No");
-
-        workspace.forEach((workspace, index) => {
-          createWorkspaceHtml(workspace, index);
-        });
-      }
-
-//displaying workspace options - index to identify each one, since one property can have more than one workspace
-      function createWorkspaceHtml(workspace, index) {
-        $("#workspaces").append(`<div class="form-group col-md-4">
-        <label for="inputType-${index}">Type</label>
-        <select id="inputType-${index}" disabled class="form-control">
+        //displaying workspace options - index to identify each one, since one property can have more than one workspace
+        function createWorkspaceHtml(workspace, index) {
+          $("#workspaces").append(`
+      <div class="form-group row">
+        <label for="inputType-${index}" class="col-sm-2 col-form-label">Type</label>
+        <select id="inputType-${index}" disabled class="form-control-select col-sm-9">
           <option selected>Choose...</option>
           <option value="meetingRoom">Meeting Room</option>
           <option value="privateOfficeRoom">Private Office Room</option>
@@ -240,9 +241,9 @@
         </div>
       </div>
 
-      <div class="form-group col-md-4">
-        <label for="leaseTerm-${index}">Lease Term:</label>
-        <select id="leaseTerm-${index}" disabled class="form-control">
+      <div class="form-group row">
+        <label for="leaseTerm-${index}" class="col-sm-2 col-form-label">Lease Term:</label>
+        <select id="leaseTerm-${index}" disabled class="form-control-select col-sm-9">
           <option selected>Choose...</option>
           <option value="day">Day</option>
           <option value="week">Week</option>
@@ -262,9 +263,10 @@
           />
         </div>
       </div>`);
-        $(`#leaseTerm-${index}`).val(workspace.leaseTerm);
-        $(`#inputType-${index}`).val(workspace.type);
-      }
+          $(`#leaseTerm-${index}`).val(workspace.leaseTerm);
+          $(`#inputType-${index}`).val(workspace.type);
+        }
+      })();
     </script>
   </body>
 </html>

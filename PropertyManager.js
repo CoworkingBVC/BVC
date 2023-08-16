@@ -37,14 +37,14 @@ class PropertyManager {
             IsMatched &&
             this._rangeCheck(dataValue, optionValue[0], optionValue[1]);
           break;
-        case "AvailabilityStart":
+        case "availabilityStart":
           let startDate = new Date(dataValue);
           IsMatched =
             IsMatched &&
             !isNaN(startDate.getTime()) &&
             new Date(optionValue) >= startDate;
           break;
-        case "AvailabilityEnd":
+        case "availabilityEnd":
           let endDate = new Date(dataValue);
           IsMatched =
             IsMatched &&

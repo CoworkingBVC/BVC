@@ -32,6 +32,19 @@ app.get("/signup.html", (req, res) => {
   res.sendFile(__dirname + "/signup.html");
 });
 
+app.get("/utils.js", (req, res) => {
+  res.sendFile(__dirname + "/utils.js");
+});
+
+app.get("/ownerpage.html", (req, res) => {
+  res.sendFile(__dirname + "/ownerpage.html");
+});
+
+app.get("/viewProperties.html", (req, res) => {
+  res.sendFile(__dirname + "/viewProperties.html");
+});
+
+
 let userinfo = []; //Start with empty array
 if (fs.existsSync("users.json")) {
   let data = fs.readFileSync("users.json", "utf-8");
@@ -88,8 +101,8 @@ app.get("/search", (req, res) => {
     hasPublicTransit,
     seats,
     isSmokingAllowed,
-    AvailabilityStart,
-    AvailabilityEnd,
+    availabilityStart,
+    availabilityEnd,
     priceMin,
     priceMax,
   } = req.query;
@@ -121,8 +134,8 @@ app.get("/search", (req, res) => {
   const workspaceSearchOptions = {
     seats: parseInt(req.query.seats),
     isSmokingAllowed: req.query.isSmokingAllowed === "true",
-    AvailabilityStart: req.query.AvailabilityStart,
-    AvailabilityEnd: req.query.AvailabilityEnd,
+    availabilityStart: req.query.availabilityStart,
+    availabilityEnd: req.query.availabilityEnd,
     price: [parseInt(req.query.priceMin), parseInt(req.query.priceMax)],
   };
 
