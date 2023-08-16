@@ -12,9 +12,18 @@
         "type": "meetingRoom",
         "seats": 4,
         "isSmokingAllowed": false,
-        "AvailabilityStart": "2023/12/12",
-        "AvailabilityEnd": "2023/12/14",
+        "availabilityStart": "2023-12-12",
+        "availabilityEnd": "2023-12-14",
         "leaseTerm": "day",
+        "price": 50
+      },
+      {
+        "type": "desk",
+        "seats": 2,
+        "isSmokingAllowed": true,
+        "availabilityStart": "2023-12-12",
+        "availabilityEnd": "2023-12-14",
+        "leaseTerm": "month",
         "price": 50
       }
     ]
@@ -32,8 +41,8 @@
         "type": "meetingRoom",
         "seats": 3,
         "isSmokingAllowed": true,
-        "AvailabilityStart": "2023/12/7",
-        "AvailabilityEnd": "2023/12/14",
+        "availabilityStart": "2023-12-7",
+        "availabilityEnd": "2023-12-14",
         "leaseTerm": "day",
         "price": 50
       }
@@ -52,8 +61,8 @@
         "type": "meetingRoom",
         "seats": 3,
         "isSmokingAllowed": true,
-        "AvailabilityStart": "2023/12/7",
-        "AvailabilityEnd": "2023/12/14",
+        "availabilityStart": "2023-12-7",
+        "availabilityEnd": "2023-12-14",
         "leaseTerm": "day",
         "price": 50
       },
@@ -61,8 +70,8 @@
         "type": "meetingRoom",
         "seats": 6,
         "isSmokingAllowed": false,
-        "AvailabilityStart": "2023/12/17",
-        "AvailabilityEnd": "2023/12/24",
+        "availabilityStart": "2023-12-17",
+        "availabilityEnd": "2023-12-24",
         "leaseTerm": "day",
         "price": 100
       }
@@ -80,8 +89,8 @@
         "type": "meetingRoom",
         "seats": 4,
         "isSmokingAllowed": false,
-        "AvailabilityStart": "2023/12/12",
-        "AvailabilityEnd": "2023/12/14",
+        "availabilityStart": "2023-12-12",
+        "availabilityEnd": "2023-12-14",
         "leaseTerm": "day",
         "price": 50
       }
@@ -99,8 +108,8 @@
         "type": "meetingRoom",
         "seats": 4,
         "isSmokingAllowed": false,
-        "AvailabilityStart": "2023/12/12",
-        "AvailabilityEnd": "2023/12/14",
+        "availabilityStart": "2023-12-12",
+        "availabilityEnd": "2023-12-14",
         "leaseTerm": "day",
         "price": 50
       }
@@ -119,8 +128,8 @@
         "type": "meetingRoom",
         "seats": 4,
         "isSmokingAllowed": false,
-        "AvailabilityStart": "2023/12/12",
-        "AvailabilityEnd": "2023/12/14",
+        "availabilityStart": "2023-12-12",
+        "availabilityEnd": "2023-12-14",
         "leaseTerm": "day",
         "price": 50
       },
@@ -128,8 +137,8 @@
         "type": "meetingRoom",
         "seats": 4,
         "isSmokingAllowed": true,
-        "AvailabilityStart": "2023/12/12",
-        "AvailabilityEnd": "2023/12/14",
+        "availabilityStart": "2023-12-12",
+        "availabilityEnd": "2023-12-14",
         "leaseTerm": "day",
         "price": 50
       }
@@ -148,8 +157,8 @@
         "type": "meetingRoom",
         "seats": 4,
         "isSmokingAllowed": true,
-        "AvailabilityStart": "2023/12/12",
-        "AvailabilityEnd": "2023/12/14",
+        "availabilityStart": "2023-12-12",
+        "availabilityEnd": "2023-12-14",
         "leaseTerm": "day",
         "price": 50
       },
@@ -157,8 +166,8 @@
         "type": "meetingRoom2",
         "seats": 4,
         "isSmokingAllowed": true,
-        "AvailabilityStart": "2023/12/12",
-        "AvailabilityEnd": "2023/12/14",
+        "availabilityStart": "2023-12-12",
+        "availabilityEnd": "2023-12-14",
         "leaseTerm": "day",
         "price": 50
       }
