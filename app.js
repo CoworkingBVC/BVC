@@ -38,27 +38,39 @@ app.post("/register", (req, res) => {
 });
 
 /* coworker - jiwon*/
-//GET - display workspace
-/* app.get("/coworker", (req, res) => {
-  res.sendFile(__dirname + "/propertyList.html");
-}); */
-
 app.get("/coworker", async (req, res) => {
   try {
     let properties = [];
 
     properties = ReadData();
+    let workspaces = [];
+    for (let i = 0; i < properties.length; i++) {
+      for (let k = 0; k < properties[i].workspace.length; k++) {
+        let worksapceWithPropertyInfo = {
+          propertyId: properties[i].propertyId,
+          address: properties[i].address,
+          neighborhood: properties[i].neighborhood,
+          squareFeet: properties[i].squareFeet,
+          hasParking: properties[i].hasParking,
+          hasPublicTransit: properties[i].hasPublicTransit,
+          type: properties[i].workspace[k].type,
+          seats: properties[i].workspace[k].seats,
+          isSmokingAllowed: properties[i].workspace[k].isSmokingAllowed,
+          AvailabilityStart: properties[i].workspace[k].AvailabilityStart,
+          AvailabilityEnd: properties[i].workspace[k].AvailabilityEnd,
+          leaseTerm: properties[i].workspace[k].leaseTerm,
+          price: properties[i].workspace[k].price,
+        };
+        workspaces.push(worksapceWithPropertyInfo);
+      }
+    }
 
     const responseMessage = {
       status: "success",
-      result: properties,
+      result: workspaces,
     };
 
-    //res.send(html);
-    //res.json(properties);
     res.json(responseMessage);
-    //res.render("/propertyList.html");
-    //res.sendFile(__dirname + "/propertyList.html");
   } catch {
     throw Error();
   }
@@ -144,7 +156,12 @@ app.get("/search", (req, res) => {
   );
 
   if (matchingWorkspaces.length > 0) {
-    res.json(matchingWorkspaces);
+    const responseMessage = {
+      status: "success",
+      result: matchingWorkspaces,
+    };
+
+    res.json(responseMessage);
   } else {
     res.json({ message: "No matching workspaces found." });
   }
