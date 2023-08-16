@@ -20,6 +20,7 @@ function DisplayWorkspace(data) {
   const PropertyContainer = document.getElementById("workspaces-container");
 
   PropertyContainer.innerHTML = "";
+  let workspaceId = 0;
   data.result.forEach((workspace) => {
     let workspaceBox = document.createElement("div");
     //console.log(workspace);
@@ -39,9 +40,10 @@ function DisplayWorkspace(data) {
       <div class="AvailabilityEnd"><span>End Date: </span>${workspace.AvailabilityEnd}</div>
       <div class="leaseTerm"><span>Lease term: </span>${workspace.leaseTerm}</div>
       <div class="price"><span>Price: $</span>${workspace.price}/${workspace.leaseTerm}</div>
-      <button id ="workspace-box-btn" class="btn btn-primary" data-id=${workspace.propertyId}>Get Info</button>
+      <button id ="workspace-box-btn" class="btn btn-primary" data-id=${workspace.propertyId} data-type = ${workspaceId}>Get Info</button>
     `;
     PropertyContainer.appendChild(workspaceBox);
+    workspaceId++;
   });
 }
 
@@ -96,15 +98,25 @@ $(function () {
 
 //get owner info
 $(document).ready(function () {
-  let workspaceBox = $("#workspaces-container");
-  workspaceBox.on("click", "#workspace-box-btn", function (e) {
+  let workspaceContainer = $("#workspaces-container");
+  workspaceContainer.on("click", "#workspace-box-btn", function (e) {
     let id = $(this).data("id");
+    let worksapceId = $(this).data("type");
+    console.log(worksapceId);
     $.ajax({
       url: `http://localhost:8081/coworker/${id}`,
       type: "GET",
       data: id,
       success: function (data) {
         localStorage.setItem("userInfo", JSON.stringify(data.result));
+        const workspacesInfo = JSON.parse(
+          localStorage.getItem("workspacesInfo")
+        );
+        console.log(workspacesInfo);
+        localStorage.setItem(
+          "workspaceInfo",
+          JSON.stringify(workspacesInfo.result[worksapceId])
+        );
         window.location.href = "property.html";
       },
       error: function (error) {
