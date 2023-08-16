@@ -5,7 +5,7 @@ $(document).ready(function () {
     method: "GET",
     dataType: "json",
     success: function (data) {
-      console.log(data);
+      console.log("1", data);
       DisplayWorkspace(data);
       localStorage.setItem("workspacesInfo", JSON.stringify(data));
     },
@@ -36,8 +36,8 @@ function DisplayWorkspace(data) {
       <div class="type"><span>Type: </span>${workspace.type}</div>
       <div class="seats"><span>Seats: </span>${workspace.seats}</div>
       <div class="isSmokingAllowed"><span>Smoking: </span>${workspace.isSmokingAllowed}</div>
-      <div class="AvailabilityStart"><span>Start Date: </span>${workspace.AvailabilityStart}</div>
-      <div class="AvailabilityEnd"><span>End Date: </span>${workspace.AvailabilityEnd}</div>
+      <div class="AvailabilityStart"><span>Start Date: </span>${workspace.availabilityStart}</div>
+      <div class="AvailabilityEnd"><span>End Date: </span>${workspace.availabilityEnd}</div>
       <div class="leaseTerm"><span>Lease term: </span>${workspace.leaseTerm}</div>
       <div class="price"><span>Price: $</span>${workspace.price}/${workspace.leaseTerm}</div>
       <button id ="workspace-box-btn" class="btn btn-primary" data-id=${workspace.propertyId} data-type = ${workspaceId}>Get Info</button>
