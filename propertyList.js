@@ -5,6 +5,7 @@ $(document).ready(function () {
     method: "GET",
     dataType: "json",
     success: function (data) {
+      console.log(data);
       DisplayWorkspace(data);
       localStorage.setItem("workspacesInfo", JSON.stringify(data));
     },
@@ -21,11 +22,10 @@ function DisplayWorkspace(data) {
   PropertyContainer.innerHTML = "";
   data.result.forEach((workspace) => {
     let workspaceBox = document.createElement("div");
-
+    //console.log(workspace);
     workspaceBox.setAttribute("id", "workspace-box");
     workspaceBox.setAttribute("class", "card");
     workspaceBox.innerHTML = `
-      <h5 class="card-title">workspace name</h5>
       <div id="hide-id">${workspace.propertyId}</div>
       <div class="address"><span>Address: </span>${workspace.address}</div>
       <div class="neighborhood"><span>Neighborhood: </span>${workspace.neighborhood}</div>
