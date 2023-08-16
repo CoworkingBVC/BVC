@@ -15,6 +15,7 @@
       integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
       crossorigin="anonymous"
     ></script>
+    <script src="utils.js"></script>
     <title>Your area</title>
   </head>
   <body>
@@ -52,87 +53,90 @@
       id="myFooter"
       class="footer mt-auto py-3 text-center bg-body-tertiary"
     ></footer>
-    <script src="index.js"></script>
     <script>
-      let ownerId = 2;
-      fetch(`http://127.0.0.1:8081/properties?ownerId=${ownerId}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((response) => response.json())
-        .then((properties) => {
-          ownerInfoTable(properties);
+      (() => {
+        const ownerId = utilities.getOwnerId();
+        fetch(`http://127.0.0.1:8081/properties?ownerId=${ownerId}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
         })
-        .catch((error) => {
-          console.error("Error saving data:", error);
-        });
-
-      function ownerInfoTable(properties) {
-        properties.forEach(({ address, neighborhood, propertyId }) => {
-          let row = $("<tr>");
-          const addressCell = $("<td>").text(address);
-          const neighborhoodCell = $("<td>").text(neighborhood);
-          const buttonCell = $("<td>");
-          const deleteButton = $("<td>");
-
-          const buttonContainer = $("<div>").addClass("btn-group");
-          const button1 = $("<button>").text("View");
-          const button2 = $("<button>").text("Edit");
-
-          button1.attr("id", "viewButton");
-          button1.on("click", () => {
-            location.href = `viewProperties.html?propertyId=${propertyId}`;
-          });
-          button1.addClass("btn btn-sm btn-outline-secondary");
-
-          button2.attr("id", "editButton");
-          button2.on("click", () => {
-            location.href = `editProperties.html?propertyId=${propertyId}`;
+          .then((response) => response.json())
+          .then((properties) => {
+            ownerInfoTable(properties);
+          })
+          .catch((error) => {
+            alert("Error loading data", error);
           });
 
-          button2.addClass("btn btn-sm btn-outline-secondary");
+        function ownerInfoTable(properties) {
+          properties.forEach(({ address, neighborhood, propertyId }) => {
+            let row = $("<tr>");
+            const addressCell = $("<td>").text(address);
+            const neighborhoodCell = $("<td>").text(neighborhood);
+            const buttonCell = $("<td>");
+            const deleteButton = $("<td>");
 
-          buttonContainer.append(button1);
-          buttonContainer.append(button2);
-          buttonCell.append(buttonContainer);
+            const buttonContainer = $("<div>").addClass("btn-group");
+            const button1 = $("<button>").text("View");
+            const button2 = $("<button>").text("Edit");
 
-          const button3 = $("<button>").text("Delete");
-          button3.on("click", () => {
-            fetch(
-              `http://127.0.0.1:8081/properties/${propertyId}?ownerId=${ownerId}`,
-              {
-                method: "DELETE",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-              }
-            )
-              .then((res) => {
-                if (res.status < 200 || res.status > 299) {
-                  throw new Error(res.statusText);
+            button1.attr("id", "viewButton");
+            button1.on("click", () => {
+              location.href = `viewProperties.html?propertyId=${propertyId}`;
+            });
+            button1.addClass("btn btn-sm btn-outline-secondary");
+
+            button2.attr("id", "editButton");
+            button2.on("click", () => {
+              location.href = `editProperties.html?propertyId=${propertyId}`;
+            });
+
+            button2.addClass("btn btn-sm btn-outline-secondary");
+
+            buttonContainer.append(button1);
+            buttonContainer.append(button2);
+            buttonCell.append(buttonContainer);
+
+            const button3 = $("<button>").text("Delete");
+            button3.on("click", () => {
+              fetch(
+                `http://127.0.0.1:8081/properties/${propertyId}?ownerId=${ownerId}`,
+                {
+                  method: "DELETE",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
                 }
-                console.log(res);
-                location.reload(true); //refresh the page to show new table
+              )
+                .then((res) => {
+                  if (res.status < 200 || res.status > 299) {
+                    throw new Error(res.statusText);
+                  }
+                  
+                  location.reload(true); //refresh the page to show new table
 
-                alert("Property deleted successfully.");
-              })
-              .catch((error) => {
-                alert("Error deleting data: " + error);
-              });
+                  alert("Property deleted successfully.");
+                })
+                .catch((error) => {
+                  alert("Error deleting data: " + error);
+                });
+            });
+            button3.addClass("btn btn-sm btn-outline-secondary");
+            deleteButton.append(button3);
+
+            row.append(addressCell);
+            row.append(neighborhoodCell);
+            row.append(buttonCell);
+            row.append(deleteButton);
+            const table = $(".table tbody");
+            table.append(row);
           });
-          button3.addClass("btn btn-sm btn-outline-secondary");
-          deleteButton.append(button3);
+        }
 
-          row.append(addressCell);
-          row.append(neighborhoodCell);
-          row.append(buttonCell);
-          row.append(deleteButton);
-          const table = $(".table tbody");
-          table.append(row);
-        });
-      }
+
+      })();
     </script>
   </body>
 </html>
