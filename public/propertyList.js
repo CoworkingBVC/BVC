@@ -24,27 +24,27 @@ function DisplayWorkspace(data) {
     workspaceBox.setAttribute("id", "workspace-box");
     workspaceBox.setAttribute("class", "card");
 
-    workspaceBox.innerHTML = ` <a href="/workspace.html">
+    workspaceBox.innerHTML = ` <button type="submit" id="workspace-box-btn" data-id=${workspace.propertyId}>
     <img src="/images/31.jpg" class="card-img-top" />
     <div class="card-body">
       <h5 class="card-title">workspace name</h5>
       <div id="workspace-info">
-        <div class="address">${workspace.address}</div>
-        <div class="neighborhood">${workspace.neighborhood}</div>
-        <div class="transit">${workspace.squareFeet}</div>
-        <div class="parking">${workspace.hasParking}</div>
-        <div class="transit">${workspace.hasPublicTransit}</div>
-        <div class="transit">${workspace.type}</div>
-        <div class="transit">${workspace.seats}</div>
-        <div class="transit">${workspace.isSmokingAllowed}</div>
-        <div class="transit">${workspace.AvailabilityStart}</div>
-        <div class="transit">${workspace.AvailabilityEnd}</div>
-        <div class="transit">${workspace.leaseTerm}</div>
-        <div class="transit">${workspace.price}</div>
+      <div id="hide-id">${workspace.propertyId}</div>
+      <div class="address"><span>Address: </span>${workspace.address}</div>
+      <div class="neighborhood"><span>Neighborhood: </span>${workspace.neighborhood}</div>
+      <div class="squareFeet"><span>Square feet: </span>${workspace.squareFeet}</div>
+        <div class="hasParking"><span>Parking: </span>${workspace.hasParking}</div>
+        <div class="hasPublicTransit"><span>Public: </span>${workspace.hasPublicTransit}</div>
+        <div class="type"><span>Type: </span>${workspace.type}</div>
+        <div class="seats"><span>Seats: </span>${workspace.seats}</div>
+        <div class="isSmokingAllowed"><span>Smoking: </span>${workspace.isSmokingAllowed}</div>
+        <div class="AvailabilityStart"><span>Start Date: </span>${workspace.AvailabilityStart}</div>
+        <div class="AvailabilityEnd"><span>End Date: </span>${workspace.AvailabilityEnd}</div>
+        <div class="leaseTerm"><span>Lease term: </span>${workspace.leaseTerm}</div>
+        <div class="price"><span>Price: $</span>${workspace.price}/${workspace.leaseTerm}</div>
       </div>
-      <div id="price">$50/day</div>
     </div>
-  </a>`;
+  </button>`;
     PropertyContainer.appendChild(workspaceBox);
   });
 }
@@ -80,6 +80,24 @@ $(function () {
         console.log("이 데이터를 처리한다", result);
         DisplayWorkspace(result);
       },
+      error: function (error) {
+        console.log(error);
+      },
+    });
+  });
+});
+
+$(document).ready(function () {
+  let workspaceBox = $("#workspaces-container");
+
+  workspaceBox.on("click", "#workspace-box-btn", function (e) {
+    let id = $("#hide-id").html();
+
+    $.ajax({
+      url: `http://localhost:8081/coworker/${id}`,
+      type: "GET",
+      data: id,
+      success: function (result) {},
       error: function (error) {
         console.log(error);
       },

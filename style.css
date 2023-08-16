@@ -58,3 +58,11 @@ div#workspaces-container {
 a {
   text-decoration: none;
 }
+
+button#workspace-box-btn {
+  border: 0 solid;
+}
+
+#hide-id {
+  display: none;
+}
