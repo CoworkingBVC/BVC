@@ -25,6 +25,14 @@ app.get("/", (req, res) => {
 
 /* signup - ody*/
 //POST - signup
+app.get("/main.html", (req, res) => {
+  res.sendFile(__dirname + "/main.html");
+});
+
+app.get("/signup.html", (req, res) => {
+  res.sendFile(__dirname + "/signup.html");
+});
+
 let userinfo = []; //Start with empty array
 if (fs.existsSync("users.json")) {
   let data = fs.readFileSync("users.json", "utf-8");
@@ -339,9 +347,8 @@ app.delete("/properties/:id", (req, res) => {
   } else {
     propertyData.splice(propertyIndex, 1);
     savePropertyData(propertyData);
+    res.status(204).send();
   }
-
-  res.status(204).send();
 });
 
 const port = 8081;

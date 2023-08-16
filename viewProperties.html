@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your properties</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="py-5 text-center">
+        <h2>Check your register property</h2>
+        <p class="lead">
+          Explore the details of the property you're interested in. <br \ />
+          Remember that you can always edit your properties using the edit
+          button.
+        </p>
+      </div>
+    </div>
+
+    <form>
+      <div class="form-group row">
+        <label for="propertyId" class="col-sm-2 col-form-label"
+          >Property Id</label
+        >
+        <div class="col-sm-10">
+          <input
+            type="text"
+            readonly
+            class="form-control-plaintext"
+            id="propertyId"
+          />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="address" class="col-sm-2 col-form-label">Address</label>
+        <div class="col-sm-10">
+          <input
+            type="text"
+            readonly
+            class="form-control-plaintext"
+            id="address"
+          />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="neighborhood" class="col-sm-2 col-form-label"
+          >Neighborhood</label
+        >
+        <div class="col-sm-10">
+          <input
+            type="text"
+            readonly
+            class="form-control-plaintext"
+            id="neighborhood"
+          />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="squareFeet" class="col-sm-2 col-form-label"
+          >Square Feet</label
+        >
+        <div class="col-sm-10">
+          <input
+            type="text"
+            readonly
+            class="form-control-plaintext"
+            id="squareFeet"
+          />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="parking" class="col-sm-2 col-form-label"
+          >Has Parking?</label
+        >
+        <div class="col-sm-10">
+          <input
+            type="text"
+            readonly
+            class="form-control-plaintext"
+            id="parking"
+          />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="publicTransit" class="col-sm-2 col-form-label"
+          >Has Public Transit?</label
+        >
+        <div class="col-sm-10">
+          <input
+            type="text"
+            readonly
+            class="form-control-plaintext"
+            id="publicTransit"
+          />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <h1 for="workspace" class="col-sm-2 col-form-label">Workspace</h1>
+      </div>
+      <div id="workspaces"></div>
+    </form>
+    <footer
+      id="myFooter"
+      class="footer mt-auto py-3 text-center bg-body-tertiary"
+    ></footer>
+
+    <script src="index.js"></script>
+    <script>
+      let ownerId = 2;
+      const urlParams = new URLSearchParams(window.location.search);
+      const propertyId = urlParams.get("propertyId");
+      console.log(propertyId);
+      fetch(
+        `http://127.0.0.1:8081/properties/${propertyId}?ownerId=${ownerId}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+        .then((response) => response.json())
+        .then((response) => {
+          ownerPropertyOnlyReadForm(response);
+        })
+        .catch((error) => {
+          console.error("Error saving data:", error);
+        });
+
+      function ownerPropertyOnlyReadForm(property) {
+        const {
+          propertyId,
+          ownerId,
+          address,
+          neighborhood,
+          squareFeet,
+          hasParking,
+          hasPublicTransit,
+          workspace,
+        } = property;
+        $("#propertyId").val(propertyId);
+        $("#address").val(address);
+        $("#neighborhood").val(neighborhood);
+        $("#squareFeet").val(squareFeet);
+        $("#parking").val(hasParking ? "Yes" : "No");
+        $("#publicTransit").val(hasPublicTransit ? "Yes" : "No");
+
+        workspace.forEach((workspace, index) => {
+          createWorkspaceHtml(workspace, index);
+        });
+      }
+
+//displaying workspace options - index to identify each one, since one property can have more than one workspace
+      function createWorkspaceHtml(workspace, index) {
+        $("#workspaces").append(`<div class="form-group col-md-4">
+        <label for="inputType-${index}">Type</label>
+        <select id="inputType-${index}" disabled class="form-control">
+          <option selected>Choose...</option>
+          <option value="meetingRoom">Meeting Room</option>
+          <option value="privateOfficeRoom">Private Office Room</option>
+          <option value="desk">Desk(open area)</option>
+        </select>
+      </div>
+
+      <div class="form-group row">
+        <label for="seats-${index}" class="col-sm-2 col-form-label"
+          >How many seats:</label
+        >
+        <div class="col-sm-10">
+          <input
+            type="text"
+            readonly
+            class="form-control-plaintext"
+            id="seats-${index}"
+            value="${workspace.seats}"
+          />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="isSmokingAllowed-${index}" class="col-sm-2 col-form-label"
+          >Is Smoking Allowed:</label
+        >
+        <div class="col-sm-10">
+          <input
+            type="text"
+            readonly
+            class="form-control-plaintext"
+            id="isSmokingAllowed-${index}"
+            value="${workspace.isSmokingAllowed ? "Yes" : "No"}"
+          />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="availabilityStart-${index}" class="col-sm-2 col-form-label"
+          >Availability Start:</label
+        >
+        <div class="col-sm-10">
+          <input
+            type="date"
+            readonly
+            class="form-control-plaintext"
+            id="availabilityStart-${index}"
+            value="${workspace.availabilityStart}"
+          />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="availabilityEnd-${index}" class="col-sm-2 col-form-label"
+          >Availability End:</label
+        >
+        <div class="col-sm-10">
+          <input
+            type="date"
+            readonly
+            class="form-control-plaintext"
+            id="availabilityEnd-${index}"
+            value="${workspace.availabilityEnd}"
+          />
+        </div>
+      </div>
+
+      <div class="form-group col-md-4">
+        <label for="leaseTerm-${index}">Lease Term:</label>
+        <select id="leaseTerm-${index}" disabled class="form-control">
+          <option selected>Choose...</option>
+          <option value="day">Day</option>
+          <option value="week">Week</option>
+          <option value="month">Month</option>
+        </select>
+      </div>
+
+      <div class="form-group row">
+        <label for="price-${index}" class="col-sm-2 col-form-label">Price:</label>
+        <div class="col-sm-10">
+          <input
+            type="text"
+            readonly
+            class="form-control-plaintext"
+            id="price-${index}"
+            value="${workspace.price}"
+          />
+        </div>
+      </div>`);
+        $(`#leaseTerm-${index}`).val(workspace.leaseTerm);
+        $(`#inputType-${index}`).val(workspace.type);
+      }
+    </script>
+  </body>
+</html>
