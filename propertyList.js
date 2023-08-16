@@ -1,11 +1,12 @@
+//GET all workspaces
 $(document).ready(function () {
   $.ajax({
-    url: "http://localhost:8081/coworker", // Replace with the actual URL
+    url: "http://localhost:8081/coworker",
     method: "GET",
-    dataType: "json", // Expected response data type
+    dataType: "json",
     success: function (data) {
-      console.log("Data received:", data);
       DisplayWorkspace(data);
+      localStorage.setItem("workspacesInfo", JSON.stringify(data));
     },
     error: function (xhr, status, error) {
       console.error("Error:", status, error);
@@ -44,10 +45,21 @@ function DisplayWorkspace(data) {
   });
 }
 
-//Sort by size
+//Sort
+function Sort(event) {
+  const btnId = event.target.id;
 
-//Search by address, nei, size, parking, public...
+  const workspaces = JSON.parse(localStorage.getItem("workspacesInfo")).result;
+  if (btnId === "sort-price") {
+    workspaces.sort((a, b) => a.price - b.price);
+  } else if (btnId === "sort-size") {
+    workspaces.sort((a, b) => a.squareFeet - b.squareFeet);
+  }
+  let sortData = { result: workspaces };
+  DisplayWorkspace(sortData);
+}
 
+//Search
 $(function () {
   $("form#search-form").on("submit", function (e) {
     e.preventDefault();
@@ -73,6 +85,7 @@ $(function () {
       data: searchData,
       success: function (result) {
         DisplayWorkspace(result);
+        localStorage.setItem("workspacesInfo", JSON.stringify(result));
       },
       error: function (error) {
         console.log(error);
@@ -80,25 +93,8 @@ $(function () {
     });
   });
 });
-/* 
-$(document).ready(function () {
-  let workspaceBox = $("#workspaces-container");
 
-  workspaceBox.on("click", "#workspace-box-btn", function (e) {
-    let id = $("#hide-id").html();
-
-    $.ajax({
-      url: `http://localhost:8081/coworker/${id}`,
-      type: "GET",
-      data: id,
-      success: function (result) {},
-      error: function (error) {
-        console.log(error);
-      },
-    });
-  });
-}); */
-
+//get owner info
 $(document).ready(function () {
   let workspaceBox = $("#workspaces-container");
   workspaceBox.on("click", "#workspace-box-btn", function (e) {
@@ -108,21 +104,6 @@ $(document).ready(function () {
       type: "GET",
       data: id,
       success: function (data) {
-        /*    console.log(data.result);
-        window.location.href = "property.html";
-
-        const userInfoContainer = document.getElementById(
-          "user-info-container"
-        );
-
-        userInfoContainer.innerHTML = "";
-
-        let userInfoBox = document.createElement("div");
-
-        userInfoBox.setAttribute("id", "user-info-box");
-        userInfoBox.innerHTML = `
-          <div>Email: ${data.result.email}</div>`;
-        userInfoContainer.appendChild(userInfoBox); */
         localStorage.setItem("userInfo", JSON.stringify(data.result));
         window.location.href = "property.html";
       },

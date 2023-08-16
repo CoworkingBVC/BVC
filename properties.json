@@ -4,7 +4,7 @@
     "ownerId": "84158b8e-49da-44c0-8300-86ccf76cd4a3",
     "address": "Walden1234",
     "neighborhood": "Walden234",
-    "squareFeet": 3556,
+    "squareFeet": 3956,
     "hasParking": true,
     "hasPublicTransit": true,
     "workspace": [
@@ -15,7 +15,7 @@
         "availabilityStart": "2023-12-12",
         "availabilityEnd": "2023-12-14",
         "leaseTerm": "day",
-        "price": 50
+        "price": 54
       }
     ]
   },
@@ -33,9 +33,9 @@
         "seats": 2,
         "isSmokingAllowed": true,
         "availabilityStart": "2023-12-12",
-        "availabilityEnd": "2023-12-14",
+        "availabilityEnd": "2023-12-19",
         "leaseTerm": "month",
-        "price": 50
+        "price": 60
       }
     ]
   },
@@ -44,7 +44,7 @@
     "ownerId": "fb7ec6d0-5101-4096-900f-b9d3fed1825e",
     "address": "9st",
     "neighborhood": "Beltline",
-    "squareFeet": 35988,
+    "squareFeet": 3588,
     "hasParking": true,
     "hasPublicTransit": false,
     "workspace": [
@@ -53,9 +53,9 @@
         "seats": 3,
         "isSmokingAllowed": true,
         "availabilityStart": "2023-12-7",
-        "availabilityEnd": "2023-12-14",
+        "availabilityEnd": "2023-12-10",
         "leaseTerm": "day",
-        "price": 50
+        "price": 20
       }
     ]
   },
@@ -64,7 +64,7 @@
     "ownerId": "fb7ec6d0-5101-4096-900f-b9d3fed1825e",
     "address": "8st",
     "neighborhood": "Beltline",
-    "squareFeet": 35988,
+    "squareFeet": 3598,
     "hasParking": true,
     "hasPublicTransit": false,
     "workspace": [
@@ -75,11 +75,11 @@
         "availabilityStart": "2023-12-7",
         "availabilityEnd": "2023-12-14",
         "leaseTerm": "day",
-        "price": 50
+        "price": 54
       },
       {
         "type": "meetingRoom",
-        "seats": 6,
+        "seats": 10,
         "isSmokingAllowed": false,
         "availabilityStart": "2023-12-17",
         "availabilityEnd": "2023-12-24",
@@ -93,18 +93,18 @@
     "ownerId": "b0b6efe5-8148-4278-8354-33d5fd0b7839",
     "address": "28ave",
     "neighborhood": "Tuxedo",
-    "squareFeet": 9876,
+    "squareFeet": 9000,
     "hasParking": true,
     "hasPublicTransit": true,
     "workspace": [
       {
         "type": "meetingRoom",
-        "seats": 4,
+        "seats": 10,
         "isSmokingAllowed": false,
         "availabilityStart": "2023-12-12",
-        "availabilityEnd": "2023-12-14",
+        "availabilityEnd": "2023-12-20",
         "leaseTerm": "day",
-        "price": 50
+        "price": 90
       }
     ]
   },
@@ -113,7 +113,7 @@
     "ownerId": "df629246-d766-44db-a7d1-b5872eea5c40",
     "address": "28ave",
     "neighborhood": "Tuxedo",
-    "squareFeet": 9876,
+    "squareFeet": 7000,
     "hasParking": true,
     "hasPublicTransit": true,
     "workspace": [
@@ -124,7 +124,7 @@
         "availabilityStart": "2023-12-12",
         "availabilityEnd": "2023-12-14",
         "leaseTerm": "day",
-        "price": 50
+        "price": 80
       }
     ]
   },
@@ -139,21 +139,21 @@
     "workspace": [
       {
         "type": "meetingRoom",
-        "seats": 4,
+        "seats": 8,
         "isSmokingAllowed": false,
         "availabilityStart": "2023-12-12",
         "availabilityEnd": "2023-12-14",
         "leaseTerm": "day",
-        "price": 50
+        "price": 85
       },
       {
         "type": "meetingRoom2",
         "seats": 4,
         "isSmokingAllowed": true,
-        "availabilityStart": "2023-12-12",
+        "availabilityStart": "2023-12-10",
         "availabilityEnd": "2023-12-14",
         "leaseTerm": "day",
-        "price": 50
+        "price": 45
       }
     ]
   }
