@@ -75,3 +75,7 @@ button#workspace-box-btn {
   flex-wrap: wrap;
   justify-content: space-between;
 }
+
+#table {
+  width: 1000px;
+}

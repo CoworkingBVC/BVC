@@ -30,18 +30,18 @@ function DisplayWorkspace(data) {
       <h5 class="card-title">workspace name</h5>
       <div id="workspace-info">
       <div id="hide-id">${workspace.propertyId}</div>
-      <div class="address"><span>Address: </span>${workspace.address}</div>
-      <div class="neighborhood"><span>Neighborhood: </span>${workspace.neighborhood}</div>
-      <div class="squareFeet"><span>Square feet: </span>${workspace.squareFeet}</div>
-        <div class="hasParking"><span>Parking: </span>${workspace.hasParking}</div>
-        <div class="hasPublicTransit"><span>Public: </span>${workspace.hasPublicTransit}</div>
-        <div class="type"><span>Type: </span>${workspace.type}</div>
-        <div class="seats"><span>Seats: </span>${workspace.seats}</div>
-        <div class="isSmokingAllowed"><span>Smoking: </span>${workspace.isSmokingAllowed}</div>
-        <div class="AvailabilityStart"><span>Start Date: </span>${workspace.AvailabilityStart}</div>
-        <div class="AvailabilityEnd"><span>End Date: </span>${workspace.AvailabilityEnd}</div>
-        <div class="leaseTerm"><span>Lease term: </span>${workspace.leaseTerm}</div>
-        <div class="price"><span>Price: $</span>${workspace.price}/${workspace.leaseTerm}</div>
+      <div id="address"><span>Address: </span>${workspace.address}</div>
+      <div id="neighborhood"><span>Neighborhood: </span>${workspace.neighborhood}</div>
+      <div id="squareFeet"><span>Square feet: </span>${workspace.squareFeet}</div>
+        <div id="hasParking"><span>Parking: </span>${workspace.hasParking}</div>
+        <div id="hasPublicTransit"><span>Public: </span>${workspace.hasPublicTransit}</div>
+        <div id="type"><span>Type: </span>${workspace.type}</div>
+        <div id="seats"><span>Seats: </span>${workspace.seats}</div>
+        <div id="isSmokingAllowed"><span>Smoking: </span>${workspace.isSmokingAllowed}</div>
+        <div id="AvailabilityStart"><span>Start Date: </span>${workspace.AvailabilityStart}</div>
+        <div id="AvailabilityEnd"><span>End Date: </span>${workspace.AvailabilityEnd}</div>
+        <div id="leaseTerm"><span>Lease term: </span>${workspace.leaseTerm}</div>
+        <div id="price"><span>Price: $</span>${workspace.price}/${workspace.leaseTerm}</div>
       </div>
     </div>
   </button>`;

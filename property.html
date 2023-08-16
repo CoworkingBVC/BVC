@@ -14,10 +14,10 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
   <body>
-    <header>
-      <h1 id="title">BVC Property List</h1>
-      <button id="logout" type="submit" class="btn btn-primary">Logout</button>
-    </header>
+    <header></header>
+    <div class="py-5 text-center">
+      <h2>BVC Workspace</h2>
+    </div>
     <main>
       <div id="user-info-container"></div>
     </main>
@@ -25,7 +25,6 @@
       id="myFooter"
       class="footer mt-auto py-3 text-center bg-body-tertiary"
     ></footer>
-    <!-- <script src="propertyList.js"></script> -->
     <script>
       $(document).ready(function () {
         const userInfo = JSON.parse(localStorage.getItem("userInfo"));
@@ -37,19 +36,45 @@
         let userInfoBox = document.createElement("div");
         userInfoBox.setAttribute("id", "user-info-box");
         userInfoBox.innerHTML = `
-       <h2>Workspace Details</h2>
-    <div>Type: ${workspaceInfo.type}</div>
-    <div>Seats: ${workspaceInfo.seats}</div>
-    <div>Smoking: ${workspaceInfo.smoking}</div>
-    <div>Start Date:${workspaceInfo.availabilityStart}</div>
-    <div>End Date: </span>${workspaceInfo.availabilityEnd}</div>
-    <div>Lease term: </span>${workspaceInfo.leaseTerm}</div>
-    <div>Price: $${workspaceInfo.price}/${workspaceInfo.leaseTerm}</div>
+        <h5>Workspace Details</h5>
+        <table id="table" class="table">
+            <thead>
+              <tr>
+                <th scope="col">Type</th>
+                <th scope="col">Seats</th>
+                <th scope="col">Smoking</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">End Date</th>
+                <th scope="col">Lease Term</th>
+                <th scope="col">Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="table-light">
+                <th scope="row">${workspaceInfo.type}</th>
+                <td>${workspaceInfo.seats}</td>
+                <td>${workspaceInfo.isSmokingAllowed}</td>
+                <td>${workspaceInfo.availabilityStart}</td>
+                <td>${workspaceInfo.availabilityEnd}</td>
+                <td>${workspaceInfo.leaseTerm}</td>
+                <td>$${workspaceInfo.price}/${workspaceInfo.leaseTerm}</td>
+              </tr>
+            </tbody>
+          </table>
+        <h5>Owner Info</h5>
+        <table id="table" class="table">
+            <tbody>
+              <tr class="table-light">
+                <th scope="row">Email</th>
+                <td scope="row">${userInfo.email}</th>
+                  <th scope="row">Phone</th>
+                <td scope="row">${userInfo.phoneNumber}</th>
+              </tr>
+            </tbody>
+          </table>
 
-    <h2>Owner Info</h2>
-    <div>Email: ${userInfo.email}</div>
-    <div>Phone Number: ${userInfo.phoneNumber}</div>
     `;
+
         userInfoContainer.appendChild(userInfoBox);
       });
     </script>
