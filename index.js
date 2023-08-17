@@ -13,18 +13,19 @@
         if (!form.checkValidity()) {
           event.preventDefault();
           event.stopPropagation();
-        } else {
-          // Fetch user info from the form and then call the postInfo function
-          const userinfo = {
-            email: $("#email").val(),
-            password: $("#password").val(),
-            phoneNumber: $("#phoneNumber").val(),
-            role: $("#role").val(),
-          };
-          postInfo(userinfo);
-          showalert();
-          // location.replace("https://www.w3schools.com");
         }
+        //else {
+        //   // Fetch user info from the form and then call the postInfo function
+        //   const userinfo = {
+        //     email: $("#email").val(),
+        //     password: $("#password").val(),
+        //     phoneNumber: $("#phoneNumber").val(),
+        //     role: $("#role").val(),
+        //   };
+        //   postInfo(userinfo);
+        //   showalert();
+        //   // location.replace("https://www.w3schools.com");
+        // }
 
         // Mark the form as validated, applying Bootstrap styles
         form.classList.add("was-validated");
@@ -39,18 +40,18 @@
   $("#myFooter").html(newFooterContent);
 })();
 
-function postInfo(userinfo) {
-  const serverURL = "http://localhost:8081/register";
+// function postInfo(userinfo) {
+//   const serverURL = "http://localhost:8081/register";
 
-  $.post(serverURL, userinfo)
-    .done((response) => {
-      console.log("Server response:", response);
-    })
-    .fail((error) => {
-      console.error("Error:", error);
-    });
-}
+//   $.post(serverURL, userinfo)
+//     .done((response) => {
+//       console.log("Server response:", response);
+//     })
+//     .fail((error) => {
+//       console.error("Error:", error);
+//     });
+// }
 
-function showalert() {
-  alert("Registration Successful!");
-}
+// function showalert() {
+//   alert("Registration Successful!");
+// }

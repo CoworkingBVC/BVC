@@ -20,15 +20,143 @@
   </head>
   <body>
     <div class="container">
-      <div class="py-5 text-center">
-        <h2>Have a property?</h2>
-        <p class="lead">
-          Add Your Property to Our Coworking Network. Provide essential details
-          such as address, square footage, parking availability, and public
-          transportation accessibility. <br \ />
-          Let your property become a hub of collaboration and innovation.
-        </p>
+      <div class="container">
+        <div class="py-5 text-center">
+          <h2>Have a property?</h2>
+          <p class="lead">
+            Add Your Property to Our Coworking Network. Provide essential
+            details such as address, square footage, parking availability, and
+            public transportation accessibility. <br \ />
+            Let your property become a hub of collaboration and innovation.
+          </p>
+        </div>
       </div>
+      <form>
+        <div class="form-group row my-3">
+          <label for="address" class="col-sm-2 col-form-label">Address</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="address" />
+          </div>
+        </div>
+
+        <div class="form-group row my-3">
+          <label for="neighborhood" class="col-sm-2 col-form-label"
+            >Neighborhood</label
+          >
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="neighborhood" />
+          </div>
+        </div>
+
+        <div class="form-group row my-3">
+          <label for="squareFeet" class="col-sm-2 col-form-label"
+            >Square Feet</label
+          >
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="squareFeet" />
+          </div>
+        </div>
+
+        <div class="form-group row my-3">
+          <label for="hasParking" class="col-sm-2 col-form-label"
+            >Does it has parking?</label
+          >
+          <select id="hasParking" class="form-control-select col-sm-9">
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
+        </div>
+
+        <div class="form-group row my-3">
+          <label for="hasPublicTransit" class="col-sm-2 col-form-label"
+            >Does it has public transit?</label
+          >
+          <select id="hasPublicTransit" class="form-control-select col-sm-9">
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
+        </div>
+      </form>
+
+      <form>
+        <div class="form-group row my-3">
+          <h3>Workspaces</h3>
+        </div>
+        <div id="workspaces"></div>
+
+        <div class="form-group row my-3">
+          <label for="inputType" class="col-sm-2 col-form-label">Type</label>
+          <select id="inputType" class="form-control-select col-sm-9">
+            <option value="meetingRoom">Meeting Room</option>
+            <option value="privateOfficeRoom">Private Office Room</option>
+            <option value="desk">Desk(open area)</option>
+          </select>
+        </div>
+
+        <div class="form-group row my-3">
+          <label for="seats" class="col-sm-2 col-form-label"
+            >How many seats:</label
+          >
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="seats" />
+          </div>
+        </div>
+
+        <div class="form-group row my-3">
+          <label for="isSmokingAllowed" class="col-sm-2 col-form-label"
+            >Is Smoking Allowed:</label
+          >
+          <select id="isSmokingAllowed" class="form-control-select col-sm-9">
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
+        </div>
+
+        <div class="form-group row my-3">
+          <label for="availabilityStart" class="col-sm-2 col-form-label"
+            >Availability Start:</label
+          >
+          <div class="col-sm-10">
+            <input type="date" class="form-control" id="availabilityStart" />
+          </div>
+        </div>
+
+        <div class="form-group row my-3">
+          <label for="availabilityEnd" class="col-sm-2 col-form-label"
+            >Availability End:</label
+          >
+          <div class="col-sm-10">
+            <input type="date" class="form-control" id="availabilityEnd" />
+          </div>
+        </div>
+
+        <div class="form-group row my-3">
+          <label for="leaseTerm" class="col-sm-2 col-form-label"
+            >Lease Term:</label
+          >
+          <select id="leaseTerm" class="form-control-select col-sm-9">
+            <option value="day">Day</option>
+            <option value="week">Week</option>
+            <option value="month">Month</option>
+          </select>
+        </div>
+
+        <div class="form-group row my-3">
+          <label for="price" class="col-sm-2 col-form-label">Price:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="price" />
+          </div>
+        </div>
+      </form>
+      <button id="addWorkspaceButton" class="btn btn-secondary btn-sm my-2">
+        Add Workspace
+      </button>
+
+      <div id="workspaceList"></div>
+
+      <button id="saveWorkspaceButton" class="btn btn-secondary btn-sm my-2">
+        Save
+      </button>
     </div>
     <form>
       <div class="form-group row">
@@ -388,5 +516,10 @@
         });
       })();
     </script>
+    <footer
+      id="myFooter"
+      class="footer mt-auto py-3 text-center bg-body-tertiary"
+    ></footer>
+    <script src="index.js"></script>
   </body>
 </html>

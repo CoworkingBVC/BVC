@@ -24,12 +24,17 @@
           </p>
         </div>
         <div class="col-md-10 mx-auto col-lg-5">
-          <form class="p-4 p-md-5 border rounded-3 bg-body-tertiary">
+          <form
+            class="p-4 p-md-5 border rounded-3 bg-body-tertiary"
+            action="/login"
+            method="POST"
+          >
             <div class="form-floating mb-3">
               <input
                 type="email"
                 class="form-control"
                 id="floatingInput"
+                name="email"
                 placeholder="name@example.com"
               />
               <label for="floatingInput">Email address</label>
@@ -39,6 +44,7 @@
                 type="password"
                 class="form-control"
                 id="floatingPassword"
+                name="password"
                 placeholder="Password"
               />
               <label for="floatingPassword">Password</label>
@@ -48,20 +54,15 @@
                 <input type="checkbox" value="remember-me" /> Remember me
               </label>
             </div>
-            <a
-              class="w-100 btn btn-lg btn-secondary"
-              type="submit"
-              href="#"
-              onclick=""
-            >
+            <button class="w-100 btn btn-lg btn-secondary" type="submit">
               Sign In
-            </a>
+            </button>
             <!-- we can add a function above  -->
             <hr class="my-4" />
             <a
               class="w-100 btn btn-lg btn-primary"
               type="submit"
-              href="signup.html"
+              href="/signup"
             >
               Sign up
             </a>

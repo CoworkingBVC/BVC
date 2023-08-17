@@ -29,7 +29,12 @@
         </div>
         <div class="container">
           <h4 class="mb-3">New User Information</h4>
-          <form class="needs-validation" novalidate>
+          <form
+            class="needs-validation"
+            novalidate
+            action="/register"
+            method="POST"
+          >
             <div class="row g-3">
               <div class="col-sm-6">
                 <label for="email" class="form-label">Email</label>
@@ -37,6 +42,7 @@
                   type="text"
                   class="form-control"
                   id="email"
+                  name="email"
                   placeholder="you@example.com"
                   value=""
                   required
@@ -46,9 +52,10 @@
               <div class="col-sm-6">
                 <label for="password" class="form-label">Password</label>
                 <input
-                  type="text"
+                  type="password"
                   class="form-control"
                   id="password"
+                  name="password"
                   placeholder="Enter new password"
                   value=""
                   required
@@ -61,6 +68,7 @@
                   type="text"
                   class="form-control"
                   id="phoneNumber"
+                  name="phoneNumber"
                   placeholder="Enter your phone number"
                   value=""
                   required
@@ -71,7 +79,7 @@
               </div>
               <div class="col-md-4">
                 <label for="role" class="form-label">Type of User</label>
-                <select class="form-select" id="role" required>
+                <select class="form-select" id="role" name="role" required>
                   <option value="">Choose...</option>
                   <option value="coworker">CoWorker</option>
                   <option value="owner">Property Owner</option>
@@ -90,7 +98,7 @@
           <hr class="my-4" />
           <p class="lead">
             Already Registered? Click here to
-            <strong><a href="main.html">Sign In</a></strong
+            <strong><a href="/main">Sign In</a></strong
             >.
           </p>
         </div>
