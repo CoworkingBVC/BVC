@@ -13,10 +13,10 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
   <body>
-    <header>
-      <h1 id="title">BVC Property List</h1>
-      <button id="logout" type="submit" class="btn btn-primary">Logout</button>
-    </header>
+    <header></header>
+    <div class="py-5 text-center">
+      <h2>BVC Property List</h2>
+    </div>
     <main>
       <form id="search-form">
         <div id="first-line">
@@ -89,6 +89,16 @@
       </div>
       <div id="workspaces-container"></div>
     </main>
+    <footer
+      id="myFooter"
+      class="footer mt-auto py-3 text-center bg-body-tertiary"
+    >
+      <span id="footer-content"></span> &copy; Copyright: BVC
+    </footer>
     <script src="propertyList.js"></script>
+    <script>
+      const currentYear = new Date().getFullYear();
+      document.getElementById("footer-content").innerHTML = currentYear;
+    </script>
   </body>
 </html>

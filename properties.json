@@ -5,8 +5,8 @@
     "address": "Walden1234",
     "neighborhood": "Walden234",
     "squareFeet": 3956,
-    "hasParking": true,
-    "hasPublicTransit": true,
+    "hasParking": false,
+    "hasPublicTransit": false,
     "workspace": [
       {
         "type": "meetingRoom",
