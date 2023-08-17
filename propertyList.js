@@ -93,6 +93,9 @@ $(function () {
       priceMin: $("input#price-min").val(),
       priceMax: $("input#price-max").val(),
     };
+    searchData = Object.fromEntries(
+      Object.entries(searchData).filter(([key, value]) => value !== "")
+    );
 
     $.ajax({
       url: "http://localhost:8081/search",
