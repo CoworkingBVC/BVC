@@ -158,10 +158,93 @@
       Save
     </button>
 
+    <footer
+      id="myFooter"
+      class="footer mt-auto py-3 text-center bg-body-tertiary"
+    ></footer>
+
     <script>
       (() => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const propertyId = urlParams.get("propertyId");
         const ownerId = utilities.getOwnerId();
         let workspaceList = [];
+
+        if (propertyId) {
+          fetchProperty(propertyId);
+        }
+
+        function fetchProperty(propertyId) {
+          fetch(
+            `http://127.0.0.1:8081/properties/${propertyId}?ownerId=${ownerId}`,
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          )
+            .then((response) => response.json())
+            .then((response) => {
+              $(`#address`).val(response.address);
+              $(`#neighborhood`).val(response.neighborhood);
+              $(`#squareFeet`).val(response.squareFeet);
+              $(`#hasParking`).val(String(response.hasParking));
+              $(`#hasPublicTransit`).val(String(response.hasPublicTransit));
+              workspaceList = response.workspace || [];
+              displayAllWorkspace(response.workspace);
+            })
+
+            .catch((error) => {
+              console.error("Error fetching data:", error);
+            });
+        }
+
+        function savingEditedProperty(propertyInfo) {
+          fetch(
+            `http://127.0.0.1:8081/properties/${propertyId}?ownerId=${ownerId}`,
+            {
+              method: "PUT",
+              body: JSON.stringify(propertyInfo),
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          )
+            .then((response) => {
+              if (response.status < 200 || response.status > 299) {
+                throw new Error(response.statusText);
+              }
+              alert("Property edited successfully.");
+
+              window.location.href = "ownerpage.html";
+            })
+
+            .catch((error) => {
+              console.error("Error saving data:", error);
+            });
+        }
+
+        function saveProperty(propertyInfo) {
+          fetch(`http://127.0.0.1:8081/properties?ownerId=${ownerId}`, {
+            method: "POST",
+            body: JSON.stringify(propertyInfo),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then((res) => {
+              if (res.status < 200 || res.status > 299) {
+                throw new Error(res.statusText);
+              }
+              alert("Property Added successfully.");
+
+              window.location.href = "ownerpage.html";
+            })
+            .catch((error) => {
+              alert("Error Adding property: " + error);
+            });
+        }
 
         function saveAndDisplayWorkspace() {
           const workspace = {
@@ -174,7 +257,7 @@
             price: $("#price").val(),
           };
           workspaceList.push(workspace);
-          displayAllWorkspace();
+          displayAllWorkspace(workspaceList);
         }
 
         const addButton = $("#addWorkspaceButton");
@@ -183,7 +266,7 @@
           saveAndDisplayWorkspace();
         });
 
-        function displayAllWorkspace() {
+        function displayAllWorkspace(workspaceList) {
           $("#workspaceList").empty();
           workspaceList.forEach((workspace, index) => {
             displayWorkspaceHtml(workspace, index);
@@ -283,7 +366,7 @@
           );
           $(`#deleteWorkspace-${index}`).on("click", () => {
             workspaceList.splice(index, 1);
-            displayAllWorkspace();
+            displayAllWorkspace(workspaceList);
           });
         }
 
@@ -296,29 +379,13 @@
             hasPublicTransit: $("#hasPublicTransit").val() == "true",
             workspace: workspaceList,
           };
-          saveProperty(propertyInfo);
+
+          if (propertyId) {
+            savingEditedProperty(propertyInfo);
+          } else {
+            saveProperty(propertyInfo);
+          }
         });
-
-        function saveProperty(propertyInfo) {
-          fetch(`http://127.0.0.1:8081/properties?ownerId=${ownerId}`, {
-            method: "POST",
-            body: JSON.stringify(propertyInfo),
-            headers: {
-              "Content-Type": "application/json",
-            },
-          })
-            .then((res) => {
-              if (res.status < 200 || res.status > 299) {
-                throw new Error(res.statusText);
-              }
-              alert("Property Added successfully.");
-
-              window.location.href = "ownerpage.html";
-            })
-            .catch((error) => {
-              alert("Error Adding property: " + error);
-            });
-        }
       })();
     </script>
   </body>

@@ -127,7 +127,7 @@
         const ownerId = utilities.getOwnerId();
         const urlParams = new URLSearchParams(window.location.search);
         const propertyId = urlParams.get("propertyId");
-        console.log(propertyId);
+        
         fetch(
           `http://127.0.0.1:8081/properties/${propertyId}?ownerId=${ownerId}`,
           {
