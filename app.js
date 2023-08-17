@@ -3,12 +3,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
 const PropertyManager = require("./PropertyManager");
-const handlebars = require("handlebars");
-//-------------------
 const http = require("http");
-//const bcrypt = require("bcrypt");
-//const server = http.createServer(app);
-//-------------------
+
 const fs = require("fs");
 
 const app = express();
@@ -24,7 +20,6 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/main.html");
 });
 
-/* login - nya*/
 //POST - login
 app.post("/login", async (req, res) => {
   try {
@@ -33,38 +28,20 @@ app.post("/login", async (req, res) => {
     if (foundUser) {
       let submittedPass = req.body.password;
       let storedPass = foundUser.password;
-      console.log({submittedPass, storedPass})
+      console.log({ submittedPass, storedPass });
       if (submittedPass === storedPass) {
         res.status(200).send(foundUser);
-        // if (foundUser.role === "coworker") {
-        //   res.send(
-            
-        //   );
-        // } else {
-        //   res.send(
-            
-        //   );
-        // }
-        //let usrname = foundUser.username;
-        // res.send(
-        //   `<div align ='center'><h2>login successful</h2></div><br><br><br><div align ='center'><h3>Hello ${usrname}</h3></div><br><br><div align='center'><a href='./login.html'>logout</a></div>`
-        // );
       } else {
-        res.status(400).send(
-          // "<div align ='center'><h2>Invalid email or password</h2></div><br><br><div align ='center'><a href='./login.html'>login again</a></div>"
-          { error: "wrong password"}
-        );
+        res.status(400).send({ error: "wrong password" });
       }
     } else {
       let fakePass = `$2b$$10$ifgfgfgfgfgfgfggfgfgfggggfgfgfga`;
       await bcrypt.compare(req.body.password, fakePass);
 
-      res.status(400).send(
-        { error: "wrong password"}
-      );
+      res.status(400).send({ error: "wrong password" });
     }
   } catch {
-    res.status(400).send({ error: "Internal server error"});
+    res.status(400).send({ error: "Internal server error" });
   }
 });
 
@@ -90,23 +67,16 @@ app.get("/viewProperties", (req, res) => {
   res.sendFile(__dirname + "/viewProperties.html");
 });
 
-app.get("/addEditProperty.html", (req, res) => {
+app.get("/addProperty.html", (req, res) => {
   res.sendFile(__dirname + "/addEditProperty.html");
 });
 
-
-let userinfo = []; //Start with empty array
+let userinfo = [];
 if (fs.existsSync("users.json")) {
   let data = fs.readFileSync("users.json", "utf-8");
   userinfo = JSON.parse(data);
 }
 
-// app.post("/register", (req, res) => {
-//   userinfo.push({ id: uuidv4(), ...req.body });
-//   fs.writeFileSync("users.json", JSON.stringify(userinfo));
-//   res.sendStatus(200);
-// });
-//---------------------------------------
 app.post("/register", async (req, res) => {
   try {
     let foundUser = userinfo.find((data) => req.body.email === data.email);
@@ -120,7 +90,6 @@ app.post("/register", async (req, res) => {
         phoneNumber: req.body.phoneNumber,
         role: req.body.role,
       };
-      //users.push(newUser);
       userinfo.push(newUser);
       console.log("User list", userinfo);
       fs.writeFileSync("users.json", JSON.stringify(userinfo));
@@ -137,7 +106,7 @@ app.post("/register", async (req, res) => {
     res.send("Internal server error");
   }
 });
-//---------------------------------------
+
 /* coworker - jiwon*/
 
 app.get("/propertyList", (req, res) => {
@@ -197,7 +166,6 @@ app.get("/coworker", async (req, res) => {
 
 //GET - search
 app.get("/search", (req, res) => {
-  //console.log("search");
   const {
     address,
     neighborhood,
@@ -288,7 +256,6 @@ app.get("/search", (req, res) => {
 
 //GET - each workspace
 app.get("/coworker/:id", (req, res) => {
-  //if the user clicks a worksapce, it will show the owner info
   try {
     let propertyId = req.params.id;
     let properties = [];
