@@ -4,8 +4,8 @@
     "ownerId": "84158b8e-49da-44c0-8300-86ccf76cd4a3",
     "address": "Walden1234",
     "neighborhood": "Walden234",
-    "squareFeet": 3956,
-    "hasParking": false,
+    "squareFeet": "3956",
+    "hasParking": true,
     "hasPublicTransit": false,
     "workspace": [
       {
@@ -16,6 +16,15 @@
         "availabilityEnd": "2023-12-14",
         "leaseTerm": "day",
         "price": 54
+      },
+      {
+        "type": "privateOfficeRoom",
+        "seats": "4",
+        "isSmokingAllowed": "false",
+        "availabilityStart": "2023-08-18",
+        "availabilityEnd": "2023-08-24",
+        "leaseTerm": "week",
+        "price": "70"
       }
     ]
   },

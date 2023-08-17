@@ -16,6 +16,7 @@
       integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
       crossorigin="anonymous"
     ></script>
+    <script src="utils.js"></script>
   </head>
   <body>
     <div class="container">
@@ -117,17 +118,19 @@
       </div>
       <div id="workspaces"></div>
     </form>
+
     <footer
       id="myFooter"
       class="footer mt-auto py-3 text-center bg-body-tertiary"
     ></footer>
-    <script src="utils.js"></script>
+    <script src="index.js"></script>
+
     <script>
       (() => {
         const ownerId = utilities.getOwnerId();
         const urlParams = new URLSearchParams(window.location.search);
         const propertyId = urlParams.get("propertyId");
-        
+
         fetch(
           `http://127.0.0.1:8081/properties/${propertyId}?ownerId=${ownerId}`,
           {
@@ -164,7 +167,7 @@
           $("#publicTransit").val(hasPublicTransit ? "Yes" : "No");
 
           workspace.forEach((workspace, index) => {
-            createWorkspaceHtml(workspace, index); //garantee that all workspace of a property will be displayed 
+            createWorkspaceHtml(workspace, index); //garantee that all workspace of a property will be displayed
           });
         }
 
