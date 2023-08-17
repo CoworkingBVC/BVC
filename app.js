@@ -4,7 +4,11 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const PropertyManager = require("./PropertyManager");
 const handlebars = require("handlebars");
-
+//-------------------
+const http = require("http");
+//const bcrypt = require("bcrypt");
+//const server = http.createServer(app);
+//-------------------
 const fs = require("fs");
 
 const app = express();
@@ -14,6 +18,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static("images"));
+app.use(express.static(path.join(__dirname, "./")));
 
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/main.html");
@@ -21,14 +26,52 @@ app.get("/", (req, res) => {
 
 /* login - nya*/
 //POST - login
+app.post("/login", async (req, res) => {
+  try {
+    let foundUser = userinfo.find((data) => req.body.email === data.email);
+    if (foundUser) {
+      let submittedPass = req.body.password;
+      let storedPass = foundUser.password;
+
+      if (submittedPass === storedPass) {
+        if (foundUser.role === "coworker") {
+          res.send(
+            `</div><br><br><br><div align ='center'><div align ='center'><h2>Sign In successful! Ready to see some workspaces?</h2></div><br><br><div align ='center'><a href='./propertyList'><h1>Let's go!</h1></a></div>`
+          );
+        } else {
+          res.send(
+            `</div><br><br><br><div align ='center'><div align ='center'><h2>Sign In successful, ready to put your property to use?</h2>`
+          );
+        }
+        //let usrname = foundUser.username;
+        // res.send(
+        //   `<div align ='center'><h2>login successful</h2></div><br><br><br><div align ='center'><h3>Hello ${usrname}</h3></div><br><br><div align='center'><a href='./login.html'>logout</a></div>`
+        // );
+      } else {
+        res.send(
+          "<div align ='center'><h2>Invalid email or password</h2></div><br><br><div align ='center'><a href='./login.html'>login again</a></div>"
+        );
+      }
+    } else {
+      let fakePass = `$2b$$10$ifgfgfgfgfgfgfggfgfgfggggfgfgfga`;
+      await bcrypt.compare(req.body.password, fakePass);
+
+      res.send(
+        "<div align ='center'><h2>Invalid email or password</h2></div><br><br><div align='center'><a href='./login.html'>login again<a><div>"
+      );
+    }
+  } catch {
+    res.send("Internal server error");
+  }
+});
 
 /* signup - ody*/
 //POST - signup
-app.get("/main.html", (req, res) => {
+app.get("/main", (req, res) => {
   res.sendFile(__dirname + "/main.html");
 });
 
-app.get("/signup.html", (req, res) => {
+app.get("/signup", (req, res) => {
   res.sendFile(__dirname + "/signup.html");
 });
 
@@ -36,11 +79,11 @@ app.get("/utils.js", (req, res) => {
   res.sendFile(__dirname + "/utils.js");
 });
 
-app.get("/ownerpage.html", (req, res) => {
+app.get("/ownerpage", (req, res) => {
   res.sendFile(__dirname + "/ownerpage.html");
 });
 
-app.get("/viewProperties.html", (req, res) => {
+app.get("/viewProperties", (req, res) => {
   res.sendFile(__dirname + "/viewProperties.html");
 });
 
@@ -50,15 +93,46 @@ if (fs.existsSync("users.json")) {
   userinfo = JSON.parse(data);
 }
 
-app.post("/register", (req, res) => {
-  userinfo.push({ id: uuidv4(), ...req.body });
-  fs.writeFileSync("users.json", JSON.stringify(userinfo));
-  res.sendStatus(200);
-});
+// app.post("/register", (req, res) => {
+//   userinfo.push({ id: uuidv4(), ...req.body });
+//   fs.writeFileSync("users.json", JSON.stringify(userinfo));
+//   res.sendStatus(200);
+// });
+//---------------------------------------
+app.post("/register", async (req, res) => {
+  try {
+    let foundUser = userinfo.find((data) => req.body.email === data.email);
+    if (!foundUser) {
+      // let Password = req.body.password;
 
+      let newUser = {
+        id: uuidv4(),
+        email: req.body.email,
+        password: req.body.password,
+        phoneNumber: req.body.phoneNumber,
+        role: req.body.role,
+      };
+      //users.push(newUser);
+      userinfo.push(newUser);
+      console.log("User list", userinfo);
+      fs.writeFileSync("users.json", JSON.stringify(userinfo));
+
+      res.send(
+        "<div align ='center'><h2>Registration successful</h2></div><br><br><div align='center'><a href='./main'>login</a></div><br><br><div align='center'><a href='./signup'>Register another user</a></div>"
+      );
+    } else {
+      res.send(
+        "<div align ='center'><h2>Email already used</h2></div><br><br><div align='center'><a href='./signup'>Register again</a></div>"
+      );
+    }
+  } catch {
+    res.send("Internal server error");
+  }
+});
+//---------------------------------------
 /* coworker - jiwon*/
 
-app.get("/propertyList.html", (req, res) => {
+app.get("/propertyList", (req, res) => {
   res.sendFile(__dirname + "/propertyList.html");
 });
 
