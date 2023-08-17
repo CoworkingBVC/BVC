@@ -44,6 +44,10 @@ app.get("/viewProperties.html", (req, res) => {
   res.sendFile(__dirname + "/viewProperties.html");
 });
 
+app.get("/addEditProperty.html", (req, res) => {
+  res.sendFile(__dirname + "/addEditProperty.html");
+});
+
 
 let userinfo = []; //Start with empty array
 if (fs.existsSync("users.json")) {
