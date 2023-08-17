@@ -27,20 +27,23 @@ function DisplayWorkspace(data) {
     workspaceBox.setAttribute("id", "workspace-box");
     workspaceBox.setAttribute("class", "card");
     workspaceBox.innerHTML = `
-      <div id="hide-id">${workspace.propertyId}</div>
-      <div class="address"><span>Address: </span>${workspace.address}</div>
-      <div class="neighborhood"><span>Neighborhood: </span>${workspace.neighborhood}</div>
-      <div class="squareFeet"><span>Square feet: </span>${workspace.squareFeet}</div>
-      <div class="hasParking"><span>Parking: </span>${workspace.hasParking}</div>
-      <div class="hasPublicTransit"><span>Public: </span>${workspace.hasPublicTransit}</div>
-      <div class="type"><span>Type: </span>${workspace.type}</div>
-      <div class="seats"><span>Seats: </span>${workspace.seats}</div>
-      <div class="isSmokingAllowed"><span>Smoking: </span>${workspace.isSmokingAllowed}</div>
-      <div class="AvailabilityStart"><span>Start Date: </span>${workspace.availabilityStart}</div>
-      <div class="AvailabilityEnd"><span>End Date: </span>${workspace.availabilityEnd}</div>
-      <div class="leaseTerm"><span>Lease term: </span>${workspace.leaseTerm}</div>
-      <div class="price"><span>Price: $</span>${workspace.price}/${workspace.leaseTerm}</div>
-      <button id ="workspace-box-btn" class="btn btn-primary" data-id=${workspace.propertyId} data-type = ${workspaceId}>Get Info</button>
+    <div class="card text-center" style="width: 25rem;">
+      <div class="card-body">
+        <p class="card-text">Address: ${workspace.address}</p>
+        <p class="card-text">Neighborhood: ${workspace.neighborhood}</p>
+        <p class="card-text">Square feet: ${workspace.squareFeet}</p>
+        <p class="card-text">Parking: ${workspace.hasParking}</p>
+        <p class="card-text">Public Transit: ${workspace.hasPublicTransit}</p>
+        <p class="card-text">Type: ${workspace.type}</p>
+        <p class="card-text">Seats: ${workspace.seats}</p>
+        <p class="card-text">Smoking: ${workspace.isSmokingAllowed}</p>
+        <p class="card-text">Start Date: ${workspace.availabilityStart}</p>
+        <p class="card-text">End Date: ${workspace.availabilityEnd}</p>
+        <p class="card-text">Lease term: ${workspace.leaseTerm}</p>
+        <p class="card-text">Price: $${workspace.price}/${workspace.leaseTerm}</p>
+        <button id ="workspace-box-btn" class="btn btn-primary" data-id=${workspace.propertyId} data-type = ${workspaceId}>Get Info</button>
+      </div>
+    </div>
     `;
     PropertyContainer.appendChild(workspaceBox);
     workspaceId++;

@@ -7,13 +7,6 @@ button:hover {
   cursor: pointer;
 }
 
-header {
-  margin: 2% 5%;
-  padding: 10px;
-  display: flex;
-  justify-content: space-between;
-}
-
 main #search-form {
   display: flex;
   flex-wrap: wrap;
@@ -52,11 +45,7 @@ div#workspaces-container {
 #workspace-box {
   padding: 10px;
   margin-bottom: 10px;
-  width: 30%;
-}
-
-a {
-  text-decoration: none;
+  border-color: transparent;
 }
 
 button#workspace-box-btn {
