@@ -29,19 +29,29 @@ function DisplayWorkspace(data) {
     workspaceBox.innerHTML = `
     <div class="card text-center" style="width: 25rem;">
       <div class="card-body">
+        <h5>Property Information</h5>
         <p class="card-text">Address: ${workspace.address}</p>
         <p class="card-text">Neighborhood: ${workspace.neighborhood}</p>
         <p class="card-text">Square feet: ${workspace.squareFeet}</p>
-        <p class="card-text">Parking: ${workspace.hasParking}</p>
-        <p class="card-text">Public Transit: ${workspace.hasPublicTransit}</p>
+        <p class="card-text">Parking: ${workspace.hasParking ? "✅" : "❌"}</p>
+        <p class="card-text">Public Transit: ${
+          workspace.hasPublicTransit ? "✅" : "❌"
+        }</p>
+        <h5>Workspace Information</h5>
         <p class="card-text">Type: ${workspace.type}</p>
         <p class="card-text">Seats: ${workspace.seats}</p>
-        <p class="card-text">Smoking: ${workspace.isSmokingAllowed}</p>
+        <p class="card-text">Smoking: ${
+          workspace.isSmokingAllowed ? "✅" : "❌"
+        }</p>
         <p class="card-text">Start Date: ${workspace.availabilityStart}</p>
         <p class="card-text">End Date: ${workspace.availabilityEnd}</p>
         <p class="card-text">Lease term: ${workspace.leaseTerm}</p>
-        <p class="card-text">Price: $${workspace.price}/${workspace.leaseTerm}</p>
-        <button id ="workspace-box-btn" class="btn btn-primary" data-id=${workspace.propertyId} data-type = ${workspaceId}>Get Info</button>
+        <p class="card-text">Price: $${workspace.price}/${
+      workspace.leaseTerm
+    }</p>
+        <button id ="workspace-box-btn" class="btn btn-primary" data-id=${
+          workspace.propertyId
+        } data-type = ${workspaceId}>Get Info</button>
       </div>
     </div>
     `;
