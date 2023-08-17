@@ -29,39 +29,42 @@ app.get("/", (req, res) => {
 app.post("/login", async (req, res) => {
   try {
     let foundUser = userinfo.find((data) => req.body.email === data.email);
+    console.log(foundUser);
     if (foundUser) {
       let submittedPass = req.body.password;
       let storedPass = foundUser.password;
-
+      console.log({submittedPass, storedPass})
       if (submittedPass === storedPass) {
-        if (foundUser.role === "coworker") {
-          res.send(
-            `</div><br><br><br><div align ='center'><div align ='center'><h2>Sign In successful! Ready to see some workspaces?</h2></div><br><br><div align ='center'><a href='./propertyList'><h1>Let's go!</h1></a></div>`
-          );
-        } else {
-          res.send(
-            `</div><br><br><br><div align ='center'><div align ='center'><h2>Sign In successful, ready to put your property to use?</h2>`
-          );
-        }
+        res.status(200).send(foundUser);
+        // if (foundUser.role === "coworker") {
+        //   res.send(
+            
+        //   );
+        // } else {
+        //   res.send(
+            
+        //   );
+        // }
         //let usrname = foundUser.username;
         // res.send(
         //   `<div align ='center'><h2>login successful</h2></div><br><br><br><div align ='center'><h3>Hello ${usrname}</h3></div><br><br><div align='center'><a href='./login.html'>logout</a></div>`
         // );
       } else {
-        res.send(
-          "<div align ='center'><h2>Invalid email or password</h2></div><br><br><div align ='center'><a href='./login.html'>login again</a></div>"
+        res.status(400).send(
+          // "<div align ='center'><h2>Invalid email or password</h2></div><br><br><div align ='center'><a href='./login.html'>login again</a></div>"
+          { error: "wrong password"}
         );
       }
     } else {
       let fakePass = `$2b$$10$ifgfgfgfgfgfgfggfgfgfggggfgfgfga`;
       await bcrypt.compare(req.body.password, fakePass);
 
-      res.send(
-        "<div align ='center'><h2>Invalid email or password</h2></div><br><br><div align='center'><a href='./login.html'>login again<a><div>"
+      res.status(400).send(
+        { error: "wrong password"}
       );
     }
   } catch {
-    res.send("Internal server error");
+    res.status(400).send({ error: "Internal server error"});
   }
 });
 

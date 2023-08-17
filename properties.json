@@ -156,5 +156,25 @@
         "price": 45
       }
     ]
+  },
+  {
+    "propertyId": "4416421e-249e-4800-a0f7-bc73e3677036",
+    "ownerId": "2",
+    "address": "20 walden ",
+    "neighborhood": "Walden",
+    "squareFeet": "435",
+    "hasParking": true,
+    "hasPublicTransit": false,
+    "workspace": [
+      {
+        "type": "privateOfficeRoom",
+        "seats": "5",
+        "isSmokingAllowed": "true",
+        "availabilityStart": "2023-08-18",
+        "availabilityEnd": "2023-08-23",
+        "leaseTerm": "week",
+        "price": "567"
+      }
+    ]
   }
 ]

@@ -1,6 +1,6 @@
 (function () {
     window.utilities = window.utilities || {};
     utilities.getOwnerId = function () { 
-        return 2;
+        return  JSON.parse(localStorage.getItem("user")).id;
      };
 })();

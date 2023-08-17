@@ -9,6 +9,7 @@
       integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
       crossorigin="anonymous"
     />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
   <body>
     <div class="container col-xl-10 col-xxl-8 px-4 py-5">
@@ -26,6 +27,7 @@
         <div class="col-md-10 mx-auto col-lg-5">
           <form
             class="p-4 p-md-5 border rounded-3 bg-body-tertiary"
+            id="loginForm"
             action="/login"
             method="POST"
           >
@@ -66,9 +68,49 @@
             >
               Sign up
             </a>
+            <div id="errorMessage"></div>
           </form>
         </div>
       </div>
     </div>
   </body>
+  <script>
+    (() => {
+      $("#loginForm").on("submit", (e) => {
+        e.preventDefault();
+        fetch("http://localhost:8081/login", {
+          method: "POST",
+          body: JSON.stringify({
+            email: $("#floatingInput").val(),
+            password: $("#floatingPassword").val(),
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => {
+            if (response.status !== 200) {
+              throw new Error(response.statusText);
+            }
+            return response.json();
+          })
+          .then((response) => {
+            const user = response;
+            localStorage.setItem("user", JSON.stringify(user));
+            if (user.role === "coworker") {
+              console.log("here");
+              window.location.href = "propertyList.html";
+            } else if (user.role === "owner") {
+              console.log("here2");
+              window.location.href = "ownerPage.html";
+            }
+          })
+          .catch((e) => {
+            $("#errorMessage").html(
+              "<div align ='center'><h2>Invalid email or password</h2></div><br><br><div align='center'><div>"
+            );
+          });
+      });
+    })();
+  </script>
 </html>
